@@ -1,0 +1,39 @@
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Web Scraping Mania.exe
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Web Scraping Mania.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Web Scraping Mania.deps.json
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Web Scraping Mania.runtimeconfig.json
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Web Scraping Mania.pdb
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\CommunityToolkit.Mvvm.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\HtmlAgilityPack.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Configuration.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Configuration.Binder.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Configuration.CommandLine.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Configuration.Json.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Configuration.UserSecrets.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.DependencyInjection.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.FileProviders.Physical.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Hosting.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Logging.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Logging.Configuration.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Logging.Console.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Logging.Debug.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Logging.EventLog.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Logging.EventSource.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Options.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Extensions.Primitives.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Microsoft.Xaml.Behaviors.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\System.Diagnostics.EventLog.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\System.Text.Encodings.Web.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\System.Text.Json.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\runtimes\win\lib\net7.0\System.Diagnostics.EventLog.Messages.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\runtimes\win\lib\net7.0\System.Diagnostics.EventLog.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\runtimes\browser\lib\net7.0\System.Text.Encodings.Web.dll
