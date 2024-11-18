@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "iAScUfK5zSMNuQtXTYFMMeuKvQn8CPwjL2R99NEqF5DJ9KV/f5zJiORb/5cJjb4QniVlZMEAEs3nI+TwCt5q1A==",
+  "success": false,
+  "projectFilePath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project Web Scraping Mania is not compatible with net8.0-windows7.0 (.NETCoreApp,Version=v8.0). Project Web Scraping Mania supports: net8.0-windows10.0.22621 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Web Scraping Mania",
+      "targetGraphs": [
+        "net8.0-windows7.0"
+      ]
+    }
+  ]
+}

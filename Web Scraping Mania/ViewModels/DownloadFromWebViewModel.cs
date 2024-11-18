@@ -6,6 +6,11 @@ namespace Web_Scraping_Mania.ViewModels
 {
     public class DownloadFromWebViewModel
     {
+        MainWindowViewModel mainWindowViewModel { get; set; }
+        public DownloadFromWebViewModel(MainWindowViewModel viewModel)
+        {
+            mainWindowViewModel = viewModel;
+        }
         private string _link;
 
         public string Link
@@ -18,8 +23,8 @@ namespace Web_Scraping_Mania.ViewModels
         {
             get
             {
-                SearchParseFuncs searchParseFuncs = new SearchParseFuncs();
-                _downloadCommand = new AsyncRelayCommand(async param => await Task.Run(async () => await searchParseFuncs.DownloadCodeAsync(Link)));
+                SaveFunctions saveFuncs = new SaveFunctions(mainWindowViewModel);
+                _downloadCommand = new AsyncRelayCommand(async param => await Task.Run(async () => await saveFuncs.SaveResourceAsync(Link)));
                 return _downloadCommand;
             }
         }

@@ -2,13 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Web_Scraping_Mania.Commands;
 using Web_Scraping_Mania.Commands.Functions;
+using Web_Scraping_Mania.Models;
 using Web_Scraping_Mania.Views;
 
 namespace Web_Scraping_Mania.ViewModels
@@ -17,28 +16,16 @@ namespace Web_Scraping_Mania.ViewModels
     {
         //Collections
         public ObservableCollection<Models.ComboBoxItem> WebSites { get; set; }
-        public ObservableCollection<TabItem> HtmlFilesCollection { get; set; }
+        private List<TabItemModel> MissedHtml { get; set; }
+        private List<TabItemModel> MissedCss { get; set; }
+        private List<TabItemModel> MissedScript { get; set; }
+        public ObservableCollection<bool> IsEnabled { get; set; }
         //Property`s region
         private Models.ComboBoxItem _selectedItem;
         public Models.ComboBoxItem SelectedItem
         {
-
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                _selectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
-            }
-
-        }
-        private bool _isPMButActive = false;
-        public bool IsPMButActive
-        {
-            get { return _isPMButActive; }
-            set { _isPMButActive = value; OnPropertyChanged(nameof(SelectedItem)); }
+            get { return _selectedItem; }
+            set { _selectedItem = value; OnPropertyChanged(nameof(SelectedItem)); }
         }
 
         private string _searchTextBox = "";
@@ -47,59 +34,68 @@ namespace Web_Scraping_Mania.ViewModels
             get { return _searchTextBox; }
             set { _searchTextBox = value; OnPropertyChanged(nameof(SearchText)); }
         }
+        private int _selectionStart;
 
-        private int _selectionIndex;
-        public int SelectionIndex
+        public int SelectionStart
         {
-            get { return _selectionIndex; }
-            set { _selectionIndex = value; OnPropertyChanged(nameof(SelectionIndex)); }
+            get { return _selectionStart; }
+            set { _selectionStart = value; OnPropertyChanged(nameof(SelectionStart)); }
         }
-        public Uri SourceLink
-        {
-            get { return new Uri(SelectedItem.Link); }
-        }
+        private int _selectionLength;
 
-        private int _dictCount;
-
-        public int DictCount
+        public int SelectionLength
         {
-            get { return _dictCount; }
-            set { _dictCount = value; OnPropertyChanged(nameof(DictCount)); }
-        }
-        private string _idName = "Тут буде Id елемента";
-
-        public string IdName
-        {
-            get { return _idName; }
-            set { _idName = value; OnPropertyChanged(nameof(IdName)); }
-        }
-        private string _className = "Тут буде Class елемента";
-
-        public string ClassName
-        {
-            get { return _className; }
-            set { _className = value; OnPropertyChanged(nameof(ClassName)); }
+            get { return _selectionLength; }
+            set { _selectionLength = value; OnPropertyChanged(nameof(SelectionLength)); }
         }
 
 
-        public Dictionary<int, int> SelectionDict { get; set; }
+        private TabItemModel _selectedHtmlTab;
+
+        public TabItemModel SelectedHtmlTab
+        {
+            get { return _selectedHtmlTab; }
+            set { _selectedHtmlTab = value; OnPropertyChanged(nameof(SelectedHtmlTab)); }
+        }
+        private TabItemModel _selectedCssTab;
+        public TabItemModel SelectedCssTab
+        {
+            get { return _selectedCssTab; }
+            set { _selectedCssTab = value; OnPropertyChanged(nameof(SelectedCssTab)); }
+        }
+        private TabItemModel _selectedScriptTab;
+        public TabItemModel SelectedScriptTab
+        {
+            get { return _selectedScriptTab; }
+            set { _selectedScriptTab = value; OnPropertyChanged(nameof(SelectedScriptTab)); }
+        }
+        private int _fontSize = 15;
+
+        public int FontSize
+        {
+            get { return _fontSize; }
+            set { _fontSize = value; OnPropertyChanged(nameof(FontSize)); }
+        }
+
+        public int Test = 0;
         private SaveFunctions saveFuncs { get; set; }
         private SearchParseFuncs searchParse { get; set; }
         private int NumberOfSelection { get; set; }
         //Constructor
         public MainWindowViewModel()
         {
-            WebSites = new ObservableCollection<Models.ComboBoxItem>() { new Models.ComboBoxItem() { Link = "https://www.google.com.ua/?hl=uk", Code = "Немає", Title = "Головна сторінка" } };
-            saveFuncs = new SaveFunctions();
-            searchParse = new SearchParseFuncs();
-            SelectionDict = new Dictionary<int, int>();
-            SelectedItem = WebSites[0];
-            HtmlFilesCollection = new ObservableCollection<TabItem>();
-
+            WebSites = new ObservableCollection<Models.ComboBoxItem>();
+            MissedHtml = new List<TabItemModel>();
+            MissedCss = new List<TabItemModel>();
+            MissedScript = new List<TabItemModel>();
+            IsEnabled = new ObservableCollection<bool>() { false, false, false };
+            //saveFuncs = new SaveFunctions();
+            searchParse = new SearchParseFuncs(this);
         }
         //Funcs region
         private void OpenAddTabWindow()
         {
+
             AddTabWindow window = new AddTabWindow();
             window.Show();
         }
@@ -126,67 +122,98 @@ namespace Web_Scraping_Mania.ViewModels
             DownloadFormWeb inter = new DownloadFormWeb();
             inter.Show();
         }
-
-        private void clearText()
+        private void plusSelection(TabItemModel tabItem)
         {
-            if (SelectedItem != null)
+            tabItem.IsTextBoxFocused = false;
+            tabItem.SearchCount[0] += 1;
+            int index = tabItem.SearchCount[0];
+            tabItem.SearchCount[2] = index + 1;
+            if (index >= tabItem.SearchCount[1] - 1)
             {
-                SelectedItem.Code = string.Empty;
+                index = tabItem.SearchCount[0] = tabItem.SearchCount[1] - 1;
+                tabItem.SearchCount[2] = tabItem.SearchCount[1];
+            }
+            SelectionStart = tabItem.SelectionCollection[index][0];
+            SelectionLength = tabItem.SelectionCollection[index][1];
+            tabItem.IsTextBoxFocused = true;
+        }
+        private void minusSelection(TabItemModel tabItem)
+        {
+            tabItem.IsTextBoxFocused = false;
+            int index = tabItem.SearchCount[0] -= 1;
+            tabItem.SearchCount[2] = index + 1;
+            if (index < 0)
+            {
+                tabItem.SearchCount[0] = 0;
+                index = tabItem.SearchCount[0];
+                tabItem.SearchCount[2] = 1;
+            }
+
+            SelectionStart = tabItem.SelectionCollection[index][0];
+            SelectionLength = tabItem.SelectionCollection[index][1];
+            tabItem.IsTextBoxFocused = true;
+        }
+        private void getAllCod()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+
+                SelectedHtmlTab.TabItemText = searchParse.GetAllCode(SelectedItem.Link);
                 OnPropertyChanged(nameof(SelectedItem));
-            }
-            else
-            {
-                MessageBox.Show("Вкладку не було вибрано!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            });
         }
-
-        private void plusSelection(object obj)
+        private void ClearSelected(TabItemModel tabItem)
         {
-            NumberOfSelection += 1;
-            if (NumberOfSelection > SelectionDict.Count - 1)
-            {
-                NumberOfSelection = SelectionDict.Count - 1;
-            }
-            TextBox box = obj as TextBox;
-            box.Select(SelectionDict.ElementAt(NumberOfSelection).Key, SelectionDict.ElementAt(NumberOfSelection).Value);
-            SelectionIndex = NumberOfSelection + 1;
-            OnPropertyChanged(nameof(SelectionIndex));
-            box.ScrollToLine(box.GetLineIndexFromCharacterIndex(SelectionDict.ElementAt(NumberOfSelection).Key));
-            box.Focus();
-        }
-        private void minusSelection(object obj)
-        {
-            NumberOfSelection -= 1;
-            if (NumberOfSelection <= 0)
-            {
-                NumberOfSelection = 0;
-            }
-            TextBox box = obj as TextBox;
-            box.Select(SelectionDict.ElementAt(NumberOfSelection).Key, SelectionDict.ElementAt(NumberOfSelection).Value);
-            SelectionIndex = NumberOfSelection + 1;
-            OnPropertyChanged(nameof(SelectionIndex));
-            box.ScrollToLine(box.GetLineIndexFromCharacterIndex(SelectionDict.ElementAt(NumberOfSelection).Key));
-            box.Focus();
+            tabItem.SearchCount[0] = 0;
+            tabItem.SearchCount[1] = 0;
+            tabItem.SearchCount[2] = 0;
         }
         private void updateUI()
         {
-            SelectedItem.Code = searchParse.GetAllCode(SelectedItem.Link);
             SearchText = "";
-            SelectionIndex = 0;
-            DictCount = 0;
+            IsEnabled = new ObservableCollection<bool> { false, false, false };
+            /*searchParse.ItemsExchange(SelectedItem.HtmlFiles, MissedHtml);
+            searchParse.ItemsExchange(SelectedItem.CssFiles, MissedCss);
+            searchParse.ItemsExchange(SelectedItem.Scripts, MissedScript);
+            SelectedHtmlTab = SelectedItem.HtmlFiles[0];
+            ClearSelected(SelectedHtmlTab);
+            OnPropertyChanged(nameof(SelectedHtmlTab));
+            ClearSelected(SelectedCssTab);
+            OnPropertyChanged(nameof(SelectedCssTab));
+            ClearSelected(SelectedScriptTab);
+            OnPropertyChanged(nameof(SelectedScriptTab));
             OnPropertyChanged(nameof(SelectedItem));
+            OnPropertyChanged(nameof(IsEnabled));
+            getAllCod();
+            GC.Collect();*/
         }
+        public void PlusFontSize(ObservableCollection<TabItemModel> fileCollection)
+        {
+            foreach (TabItemModel tabItem in fileCollection)
+            {
+                FontSize += 2;
 
+            }
+        }
+        public void MinusFontSize(ObservableCollection<TabItemModel> fileCollection)
+        {
+            foreach (TabItemModel tabItem in fileCollection)
+            {
+                FontSize -= 2;
+                if (FontSize <= 1)
+                {
+                    FontSize = 1;
+                }
+            }
+        }
         //Command region
         private CommandBase _addCommand;
         public ICommand AddTabCommand
         {
             get
             {
-
                 _addCommand = new CommandBase(param => OpenAddTabWindow(), param => true);
                 return _addCommand;
-
             }
         }
 
@@ -202,11 +229,12 @@ namespace Web_Scraping_Mania.ViewModels
         }
 
         private AsyncRelayCommand _getAllCommand;
+
         public IAsyncRelayCommand GetAllCommand
         {
             get
             {
-                _getAllCommand = new AsyncRelayCommand(async param => await Task.Run(() => { SelectedItem.Code = searchParse.GetAllCode(SelectedItem.Link); OnPropertyChanged(nameof(SelectedItem)); }));
+                _getAllCommand = new AsyncRelayCommand(async param => await Task.Run(() => { getAllCod(); }));
                 return _getAllCommand;
             }
         }
@@ -220,24 +248,24 @@ namespace Web_Scraping_Mania.ViewModels
                 return _getByTagCommand;
             }
         }
-        private CommandBase _clearCommand;
-        public ICommand ClearText
+        private CommandBase _saveCommand;
+
+        public ICommand SaveProjectCommand
         {
             get
             {
-                _clearCommand = new CommandBase(param => clearText(), param => true);
-
-                return _clearCommand;
+                _saveCommand = new CommandBase(async param => await saveFuncs.SaveProjectOrSelected(0), param => true);
+                return _saveCommand;
             }
         }
+        private CommandBase _saveSelectedCommand;
 
-        private CommandBase _saveCommand;
-        public ICommand SaveFileCommand
+        public ICommand SaveSelectedFile
         {
             get
             {
-                _saveCommand = new CommandBase(param => saveFuncs.SaveFunc(this), param => true);
-                return _saveCommand;
+                _saveSelectedCommand = new CommandBase(async param => await saveFuncs.SaveProjectOrSelected(1), param => true);
+                return _saveSelectedCommand;
             }
         }
 
@@ -263,32 +291,79 @@ namespace Web_Scraping_Mania.ViewModels
         }
 
         private CommandBase _textSelection;
+        private void findText()
+        {
+            searchParse.FindText(SearchText, SelectedItem.HtmlFiles, 0, MissedHtml);
+            searchParse.FindText(SearchText, SelectedItem.CssFiles, 1, MissedCss);
+            searchParse.FindText(SearchText, SelectedItem.Scripts, 2, MissedScript);
+            OnPropertyChanged(nameof(SelectedHtmlTab));
+            OnPropertyChanged(nameof(SelectedScriptTab));
+            OnPropertyChanged(nameof(SelectedCssTab));
+        }
         public ICommand TextSelection
         {
             get
             {
-                _textSelection = new CommandBase(obj => searchParse.FindText(this, SearchText, SelectedItem.Code), param => true);
+                _textSelection = new CommandBase(param => findText(), param => true);
                 return _textSelection;
             }
         }
 
-        private CommandBase _plusNumber;
-        public ICommand PlusSelection
+        private CommandBase _plusNumberHtml;
+        public ICommand PlusSelectionHtml
         {
             get
             {
-                _plusNumber = new CommandBase(obj => plusSelection(obj), param => IsPMButActive);
-                return _plusNumber;
+                _plusNumberHtml = new CommandBase(obj => { plusSelection(SelectedHtmlTab); OnPropertyChanged(nameof(SelectedHtmlTab)); }, param => true);
+                return _plusNumberHtml;
             }
         }
 
-        private CommandBase _minusSelection;
-        public ICommand MinusSelection
+        private CommandBase _minusSelectionHtml;
+        public ICommand MinusSelectionHtml
         {
             get
             {
-                _minusSelection = new CommandBase(obj => minusSelection(obj), param => IsPMButActive);
-                return _minusSelection;
+                _minusSelectionHtml = new CommandBase(obj => { minusSelection(SelectedHtmlTab); OnPropertyChanged(nameof(SelectedHtmlTab)); }, param => true);
+                return _minusSelectionHtml;
+            }
+        }
+        private CommandBase _plusNumberCss;
+        public ICommand PlusSelectionCss
+        {
+            get
+            {
+                _plusNumberCss = new CommandBase(obj => { plusSelection(SelectedCssTab); OnPropertyChanged(nameof(SelectedCssTab)); }, param => true);
+                return _plusNumberCss;
+            }
+        }
+
+        private CommandBase _minusSelectionCss;
+        public ICommand MinusSelectionCss
+        {
+            get
+            {
+                _minusSelectionCss = new CommandBase(obj => { minusSelection(SelectedCssTab); OnPropertyChanged(nameof(SelectedCssTab)); }, param => true);
+                return _minusSelectionCss;
+            }
+        }
+        private CommandBase _plusNumberScript;
+        public ICommand PlusSelectionScript
+        {
+            get
+            {
+                _plusNumberScript = new CommandBase(obj => { plusSelection(SelectedScriptTab); OnPropertyChanged(nameof(SelectedScriptTab)); }, param => true);
+                return _plusNumberScript;
+            }
+        }
+
+        private CommandBase _minusSelectionScript;
+        public ICommand MinusSelectionScript
+        {
+            get
+            {
+                _minusSelectionScript = new CommandBase(obj => { minusSelection(SelectedScriptTab); OnPropertyChanged(nameof(SelectedScriptTab)); }, param => true);
+                return _minusSelectionScript;
             }
         }
         private AsyncRelayCommand _updateButton;
@@ -307,9 +382,39 @@ namespace Web_Scraping_Mania.ViewModels
         {
             get
             {
-                _aboutAuthor = new CommandBase(param => MessageBox.Show("Мене звати Снетков Артем. Я навчаюсь в ліцеї 'Політ'. \nЯ навчаюсь в групі Л11-В", "Інформація про мене", MessageBoxButton.OK, MessageBoxImage.Information), param => true);
+                _aboutAuthor = new CommandBase(param => MessageBox.Show("Розробник: Снетков Артем\nУчень 11 класу Наукового ліцею 'Політ'\nпри Кременчуцькій,\nгуманітарно-технічній академії ім. А.С. Макаренка", "Інформація про мене", MessageBoxButton.OK, MessageBoxImage.Information), param => true);
                 return _aboutAuthor;
             }
         }
+        private CommandBase _openPreviewWindow;
+        private void openPrevWindow()
+        {
+            PreviewWindow previewWindow = new PreviewWindow();
+            previewWindow.Show();
+        }
+        public ICommand OpenPreviewWindow
+        {
+            get
+            {
+                _openPreviewWindow = new CommandBase(param => openPrevWindow(), param => true);
+                return _openPreviewWindow;
+            }
+        }
+        private CommandBase _saveSelectedAsType;
+        private void saveSelectedFilesAsType()
+        {
+            saveFuncs.SaveFunc(SelectedHtmlTab);
+            saveFuncs.SaveFunc(SelectedCssTab);
+            saveFuncs.SaveFunc(SelectedScriptTab);
+        }
+        public ICommand SaveSelectedAsType
+        {
+            get
+            {
+                _saveSelectedAsType = new CommandBase(param => saveSelectedFilesAsType(), param => true);
+                return _saveSelectedAsType;
+            }
+        }
+
     }
 }

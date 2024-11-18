@@ -6,26 +6,36 @@
         xmlns:local="clr-namespace:Web_Scraping_Mania.Views"
         xmlns:VW="clr-namespace:Web_Scraping_Mania.ViewModels"
         mc:Ignorable="d"
-        Title="Додати вкладку" Height="450" Width="550" ResizeMode="CanMinimize">
+        Title="Додати вкладку" Height="450" Width="552" ResizeMode="CanMinimize" Closed="Window_Closed" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275*"/>
             <ColumnDefinition Width="243*"/>
-            <ColumnDefinition Width="32*"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding TabName}" Margin="10,23,0,24" IsEnabled="{Binding EnableTitle}"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Введіть назву вкладки" TextWrapping="Wrap" FontSize="17" VerticalAlignment="Center" Margin="8,0,5,0" IsEnabled="{Binding EnableTitle}" Grid.ColumnSpan="2" Height="23"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Введіть назву вкладки" TextWrapping="Wrap" FontSize="17" VerticalAlignment="Center" IsEnabled="{Binding EnableTitle}" Height="23"  Margin="8,0,0,0"/>
         <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding TabLink}" Margin="10,23,0,23"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="Введіть URL-адресу сторінки" TextWrapping="Wrap" FontSize="17" VerticalAlignment="Center" Margin="8,0,0,0" Height="22"/>
-        <TextBlock Grid.Row="2" Grid.Column="2" Text="*" FontSize="25" VerticalAlignment="Center" Foreground="Red" Height="34"/>
-        <Button Grid.Row="3" Grid.Column="1" Height="50" Content="Додати вкладку" FontSize="17" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding AddTabCommand}" Margin="0,0,5,5" Grid.ColumnSpan="2"/>
-        <CheckBox Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Content="Ввести ім'я вручну" Margin="10,0,0,0" IsChecked="{Binding EnableTitle}" Height="15"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Введіть шлях для збереження" TextWrapping="Wrap" FontSize="17" VerticalAlignment="Center" IsEnabled="{Binding EnableTitle}" Height="23"  Margin="8,0,0,0"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding FilePath}" Margin="10,23,0,23" IsEnabled="{Binding EnableDowmload}"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <TextBlock Text="Введіть URL-адресу сторінки" TextWrapping="Wrap" FontSize="17" VerticalAlignment="Center" Margin="8,0,0,0" Height="22"/>
+            <TextBlock Text="*" FontSize="25" VerticalAlignment="Center" Foreground="Red" Height="34" Margin="5,0,0,0"/>
+        </StackPanel>
+       
+        <Button Grid.Row="4" Grid.Column="1" Height="50" Content="Додати вкладку" FontSize="17" Width="200" VerticalAlignment="Center"  Command="{Binding AddTabCommand}" HorizontalAlignment="Right" Margin="0,0,10,5" Grid.ColumnSpan="2"/>
+        <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,0,10">
+            <CheckBox VerticalAlignment="Center" Content="Ввести ім'я вручну" Margin="10,10,0,0" IsChecked="{Binding EnableTitle}" Height="15"/>
+            <RadioButton VerticalAlignment="Center" Content="Завантажити ресурси" Margin="10,10,0,0" IsChecked="{Binding EnableDowmload}" Height="15"/>
+            <RadioButton VerticalAlignment="Center" Content="Додати не завантажуючи" Margin="10,10,0,0" IsChecked="{Binding EnableBuffering}" Height="15"/>
+        </StackPanel>
+
     </Grid>
 </Window>

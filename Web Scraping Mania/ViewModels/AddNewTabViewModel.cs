@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Web_Scraping_Mania.Commands;
 using Web_Scraping_Mania.Commands.Functions;
 
 namespace Web_Scraping_Mania.ViewModels
@@ -13,8 +15,8 @@ namespace Web_Scraping_Mania.ViewModels
         public AddNewTabViewModel(MainWindowViewModel viewModel)
         {
             _mainWindowViewModel = viewModel;
-            saveFuncs = new SaveFunctions();
-            searchParse = new SearchParseFuncs();
+            saveFuncs = new SaveFunctions(viewModel);
+            searchParse = new SearchParseFuncs(viewModel);
         }
         private string _tabName;
 
@@ -43,6 +45,14 @@ namespace Web_Scraping_Mania.ViewModels
                 OnPropertyChanged(nameof(TabLink));
             }
         }
+        private string _filePath;
+
+        public string FilePath
+        {
+            get { return _filePath; }
+            set { _filePath = value; OnPropertyChanged(nameof(FilePath)); }
+        }
+
         private bool _EnableTitle = false;
 
         public bool EnableTitle
@@ -54,30 +64,61 @@ namespace Web_Scraping_Mania.ViewModels
                 OnPropertyChanged(nameof(EnableTitle));
             }
         }
+        private bool _enableDowmload = false;
+
+        public bool EnableDowmload
+        {
+            get { return _enableDowmload; }
+            set
+            {
+                _enableDowmload = value;
+                OnPropertyChanged(nameof(EnableDowmload));
+            }
+        }
+        private bool _enableBuffering = true;
+
+        public bool EnableBuffering
+        {
+            get { return _enableBuffering; }
+            set { _enableBuffering = value; OnPropertyChanged(nameof(EnableBuffering)); }
+        }
 
 
-        private AsyncRelayCommand _addTabCommand;
+        private CommandBase _addTabCommand;
         private void _addTab()
         {
             string code = searchParse.GetAllCode(TabLink);
             string title = searchParse.GetTitle(TabLink);
             if (EnableTitle)
             {
-                saveFuncs.AddNewTab(TabName, code, _mainWindowViewModel, TabLink);
+                title = TabName;
             }
-            else
+            if (EnableDowmload)
             {
-                saveFuncs.AddNewTab(title, code, _mainWindowViewModel, TabLink);
+                saveFuncs.AddNewTab(title, code, FilePath, 0, _mainWindowViewModel, TabLink);
             }
+            else if (EnableBuffering)
+            {
+                saveFuncs.AddNewTab(title, code, FilePath, 1, _mainWindowViewModel, TabLink);
+            }
+
         }
-        public IAsyncRelayCommand AddTabCommand
+        public ICommand AddTabCommand
         {
             get
             {
-
-                _addTabCommand = new AsyncRelayCommand(param => Task.Run(_addTab));
+                _addTabCommand = new CommandBase(param => Task.Factory.StartNew(_addTab), param => true);
                 return _addTabCommand;
             }
+        }
+        public void Reset()
+        {
+            TabName = string.Empty;
+            TabLink = string.Empty;
+            EnableDowmload = false;
+            EnableBuffering = true;
+            EnableTitle = false;
+            FilePath = string.Empty;
         }
         //https://www.w3schools.com/xml/xpath_intro.asp
     }

@@ -1,0 +1,25 @@
+﻿<Window x:Class="Web_Scraping_Mania.Views.PreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Web_Scraping_Mania.Views"
+        xmlns:WV="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d"
+        Title="Прев'ю" Height="450" Width="800" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+ 
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <WV:WebView2 x:Name="WebViewBrowser" Grid.Row="1" Grid.ColumnSpan="2" CoreWebView2InitializationCompleted="WebViewBrowser_CoreWebView2InitializationCompleted" Source="{Binding CurrentLink}"/>
+        <TextBox BorderBrush="Transparent" Grid.Row="0" Height="35px" Text="{Binding IdName}" IsReadOnly="True" ToolTip="Тут буде ID елемента"/>
+        <TextBox BorderBrush="Transparent" Grid.Row="0" Grid.Column="1" Text="{Binding ClassName}" Height="35px" IsReadOnly="True" ToolTip="Тут буде клас елемента"/>
+    </Grid>
+
+</Window>

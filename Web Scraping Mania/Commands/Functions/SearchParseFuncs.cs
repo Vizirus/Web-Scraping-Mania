@@ -1,8 +1,7 @@
 ﻿using HtmlAgilityPack;
-using Microsoft.Win32;
 using System;
-using System.IO;
-using System.Net.Http;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +12,15 @@ namespace Web_Scraping_Mania.Commands.Functions
 {
     public class SearchParseFuncs
     {
+
+        private MainWindowViewModel mainWindowViewModel;
+        private FormatingFuncs formatingFuncs;
+        public SearchParseFuncs(MainWindowViewModel mainWindowViewModel)
+        {
+            this.mainWindowViewModel = mainWindowViewModel;
+            //formatingFuncs = new FormatingFuncs();
+        }
+
 
         public HtmlNodeCollection GetCode(string tag, string link)
         {
@@ -28,8 +36,9 @@ namespace Web_Scraping_Mania.Commands.Functions
             {
                 HtmlWeb htmlPage = new HtmlWeb();
                 var htmlCode = htmlPage.Load(link);
-                HtmlNode node = htmlCode.DocumentNode.SelectSingleNode("//*");
-                resultCode = node.OuterHtml;
+                HtmlNode nodeCol = htmlCode.DocumentNode.SelectSingleNode("//*");
+                resultCode += nodeCol.OuterHtml;
+
             }
             catch (Exception ex)
             {
@@ -38,43 +47,14 @@ namespace Web_Scraping_Mania.Commands.Functions
             }
             return resultCode;
         }
-        public async Task DownloadCodeAsync(string link)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text File|*.txt|CSS File|*.css|Html File|*.html|JavaScript|*.js|PNG image|*.png|WEBP Image|*.webp|PHP|*.php";
-            saveFileDialog.ShowDialog();
-            if (link != null && link.Contains("http") && link.Contains("https"))
-            {
-                try
-                {
-                    HttpClient client = new HttpClient();
-                    var result = await client.GetStreamAsync(link);
 
-                    using (var sw = File.Create(saveFileDialog.FileName))
-                    {
-                        await result.CopyToAsync(sw);
-                        sw.Close();
-                        result.Close();
-                    }
-                    client.Dispose();
-                }
-                catch
-                {
-                    MessageBox.Show("Такого ресурсу немає на сайті!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Введе посилання написано не правильно!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        public async Task ParseByTag(MainWindowViewModel mainWindowViewModel, string Tag, ParsePropModel selectedItem)
+        public async Task ParseByTag(string Tag, ParsePropModel selectedItem)
         {
             try
             {
                 if (Tag != string.Empty)
                 {
-                    await selectedItem.SelectionFunc(mainWindowViewModel, mainWindowViewModel.SelectedItem.Link, Tag);
+                    await selectedItem.SelectionFunc(mainWindowViewModel.SelectedItem.Link, Tag);
                     mainWindowViewModel.OnPropertyChanged(nameof(mainWindowViewModel.SelectedItem));
                 }
             }
@@ -84,22 +64,69 @@ namespace Web_Scraping_Mania.Commands.Functions
             }
 
         }
-        public void FindText(MainWindowViewModel mainWindowViewModel, string data, string text)
+        public void ItemsExchange(ObservableCollection<TabItemModel> tabItemModels, List<TabItemModel> itemModelsSilent)
         {
-            if (text.Contains(data) == true)
+            if (itemModelsSilent.Count != 0)
             {
-                mainWindowViewModel.SelectionDict.Clear();
-                foreach (Match match in Regex.Matches(text, data))
+                foreach (var i in itemModelsSilent)
                 {
-                    mainWindowViewModel.SelectionDict.Add(match.Index, match.Value.Length);
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        tabItemModels.Add(i);
+                    });
                 }
-                mainWindowViewModel.IsPMButActive = true;
-                mainWindowViewModel.DictCount = mainWindowViewModel.SelectionDict.Count;
-                mainWindowViewModel.OnPropertyChanged(nameof(mainWindowViewModel.IsPMButActive));
+                itemModelsSilent.Clear();
+            }
+        }
+        public void FindText(string data, ObservableCollection<TabItemModel> tabItemModels, int searchIndex, List<TabItemModel> itemModelsSilent)
+        {
+            string[] tab = { "HTML", "CSS", "JS або PHP" };
+            if (tabItemModels.Count > 0)
+            {
+
+                foreach (var tabItem in tabItemModels)
+                {
+                    tabItem.SelectionCollection.Clear();
+                    foreach (Match match in Regex.Matches(tabItem.TabItemText, data))
+                    {
+                        tabItem.SelectionCollection.Add([match.Index, match.Value.Length]);
+                    }
+                    if (tabItem.SelectionCollection.Count > 0)
+                    {
+                        tabItem.IsTextBoxFocused = false;
+                        tabItem.SearchCount[1] = tabItem.SelectionCollection.Count;
+                        tabItem.SearchCount[2] = 1;
+                        mainWindowViewModel.SelectionStart = tabItem.SelectionCollection[0][0];
+                        mainWindowViewModel.SelectionLength = tabItem.SelectionCollection[0][1];
+                        tabItem.IsTextBoxFocused = true;
+                        mainWindowViewModel.IsEnabled[searchIndex] = true;
+                    }
+                    else
+                    {
+                        itemModelsSilent.Add(tabItem);
+                        if (tabItemModels.Count == 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (itemModelsSilent.Count > 0)
+                {
+                    foreach (var i in itemModelsSilent)
+                    {
+                        tabItemModels.Remove(i);
+                    }
+                }
+                if (tabItemModels.Count == 0)
+                {
+                    MessageBox.Show($"У блоці {tab[searchIndex]} не було знайдено жодного слова!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    mainWindowViewModel.IsEnabled[searchIndex] = false;
+                }
+
             }
             else
             {
-                MessageBox.Show("Не вдалося знайти слово або символ в тексті!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не було обрано вкладку, у якій треба провести пошук!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         public string GetTitle(string link)
@@ -119,98 +146,91 @@ namespace Web_Scraping_Mania.Commands.Functions
             }
             return result;
         }
-        private string formQuery(string id, string clas, string node)
+
+        public async Task ReturnObjAttribute(Microsoft.Web.WebView2.Wpf.WebView2 webView, OpenPreviewWindowViewModel viewModel)
         {
-            string query = String.Empty;
-            if (id == "\"\"")
+            FormatingFuncs formatingFuncs = new FormatingFuncs();
+
+            string result = formatingFuncs.FormatHTML(await webView.CoreWebView2.ExecuteScriptAsync("document.activeElement.outerHTML;"));
+            string id = await webView.CoreWebView2.ExecuteScriptAsync("document.activeElement.id;");
+            string className = await webView.CoreWebView2.ExecuteScriptAsync("document.activeElement.className;");
+            //result = formatingFuncs.FormatHTML(result);
+            if (result != "" || result != "null")
             {
-                query = $"//{node.Substring(1, node.Length - 2)}[@class={clas}]";
-            }
-            else if (clas == "\"\"")
-            {
-                query = $"//{node.Substring(1, node.Length - 2)}[@id={id}]";
-            }
-            else if (clas == "\"\"" && id == "\"\"")
-            {
-                query = String.Empty;
+                ObservableCollection<TabItemModel> tabs = new ObservableCollection<TabItemModel>();
+                tabs.Add(new TabItemModel("Результати парсингу", result));
+                mainWindowViewModel.WebSites.Add(new Models.ComboBoxItem() { Link = webView.CoreWebView2.Source, Title = "Пошук з браузера id = " + id + " class = " + className, HtmlFiles = tabs });
+                viewModel.ClassName = className;
+                viewModel.IdName = id;
+                mainWindowViewModel.OnPropertyChanged(nameof(mainWindowViewModel.WebSites));
             }
             else
             {
-                query = $"//{node.Substring(1, node.Length - 2)}[@class={clas} and @id={id}]";
+                MessageBox.Show("Невдалося спарсити код активного елемента!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            return query;
 
         }
-        private void AddFromBrowser(MainWindowViewModel viewModel, string id, string className, Microsoft.Web.WebView2.Wpf.WebView2 webView, string Node)
+        public async Task ReturnSelectedTextAtributes(Microsoft.Web.WebView2.Wpf.WebView2 webView, OpenPreviewWindowViewModel viewModel)
         {
-            string Query = formQuery(id, className, Node);
-            if (Query != String.Empty)
+            string result = formatingFuncs.FormatHTML(await webView.CoreWebView2.ExecuteScriptAsync("document.getSelection().anchorNode.parentNode.outerHTML;"));
+            string id = await webView.CoreWebView2.ExecuteScriptAsync("document.getSelection().anchorNode.parentNode.id;");
+            string className = await webView.CoreWebView2.ExecuteScriptAsync("document.getSelection().anchorNode.parentNode.className;");
+            //result = formatingFuncs.FormatHTML(result);
+            if (result != "" || result != "null")
             {
-                string result = String.Empty;
-                HtmlNodeCollection collection = GetCode(Query, webView.CoreWebView2.Source);
-                if (collection != null)
+                ObservableCollection<TabItemModel> tabs = new ObservableCollection<TabItemModel>();
+                tabs.Add(new TabItemModel("Результати парсингу", result));
+                mainWindowViewModel.WebSites.Add(new Models.ComboBoxItem() { Link = webView.CoreWebView2.Source, Title = "Пошук з браузера id = " + id + " class = " + className, HtmlFiles = tabs });
+                viewModel.ClassName = className;
+                viewModel.IdName = id;
+                mainWindowViewModel.OnPropertyChanged(nameof(mainWindowViewModel.WebSites));
+            }
+            else
+            {
+                MessageBox.Show("Невдалося спарсити код активного елемента!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        public string LinkForamtion(string WebPageLink, string ResourceLink)
+        {
+            string ResultQueryString = String.Empty;
+            if (ResourceLink.Contains("http"))
+            {
+                ResultQueryString = ResourceLink;
+            }
+            else
+            {
+                string[] CutedWebPageLink = WebPageLink.Split("/");
+                if (ResourceLink.IndexOf("/") == 0)
                 {
-                    foreach (HtmlNode node in collection)
+                    ResultQueryString = CutedWebPageLink[0] + "//" + CutedWebPageLink[2] + ResourceLink;
+                    if (ResultQueryString.Contains("auth"))
                     {
-                        result += node.OuterHtml + "\n";
+                        ResultQueryString = ResultQueryString.Replace("www", "auth");
                     }
-                    viewModel.WebSites.Add(new ComboBoxItem() { Code = result, Link = webView.CoreWebView2.Source, Title = "Пошук з браузера id = " + id + " class = " + className });
-                    viewModel.OnPropertyChanged(nameof(viewModel.WebSites));
                 }
                 else
                 {
-                    MessageBox.Show("Не вдалося спарсити код елемента!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
-        public async Task ReturnObjAttribute(Microsoft.Web.WebView2.Wpf.WebView2 webView, MainWindowViewModel viewModel)
-        {
-            string id = await webView.CoreWebView2.ExecuteScriptAsync("document.activeElement.id;");
-            string Node = await webView.CoreWebView2.ExecuteScriptAsync("document.activeElement.tagName;");
-            string className = await webView.CoreWebView2.ExecuteScriptAsync("document.activeElement.className");
-            if (id == "\"\"" && className == "\"\"")
-            {
-                string query = "document.activeElement";
-                while (id == "\"\"" && className == "\"\"")
-                {
-                    query += ".parentNode";
-                    string ID = query + ".id;";
-                    string CLASS = query + ".className;";
-                    string NODE = query + ".tagName";
-                    id = await webView.CoreWebView2.ExecuteScriptAsync(ID);
-                    className = await webView.CoreWebView2.ExecuteScriptAsync(CLASS);
-                    Node = await webView.CoreWebView2.ExecuteScriptAsync(NODE);
-                }
-            }
-            Node = Node.ToLower();
-            viewModel.IdName = id;
-            viewModel.ClassName = className;
-            AddFromBrowser(viewModel, id, className, webView, Node);
+                    ResultQueryString = CutedWebPageLink[0] + "//" + CutedWebPageLink[2] + "/" + ResourceLink;
+                    if (ResultQueryString.Contains("auth"))
+                    {
+                        ResultQueryString = ResultQueryString.Replace("www", "auth");
 
-        }
-        public async Task ReturnSelectedTextAtributes(Microsoft.Web.WebView2.Wpf.WebView2 webView, MainWindowViewModel viewModel)
-        {
-            string id = await webView.CoreWebView2.ExecuteScriptAsync("document.getSelection().anchorNode.parentNode.id;");
-            string Node = await webView.CoreWebView2.ExecuteScriptAsync("document.getSelection().anchorNode.parentNode.tagName;");
-            string className = await webView.CoreWebView2.ExecuteScriptAsync("document.getSelection().anchorNode.parentNode.className;");
-            if (id == "\"\"" && className == "\"\"")
-            {
-                string query = "document.getSelection().anchorNode.parentNode";
-                while (id == "\"\"" && className == "\"\"")
-                {
-                    query += ".parentNode";
-                    string ID = query + ".id;";
-                    string CLASS = query + ".className;";
-                    string NODE = query + ".tagName";
-                    id = await webView.CoreWebView2.ExecuteScriptAsync(ID);
-                    className = await webView.CoreWebView2.ExecuteScriptAsync(CLASS);
-                    Node = await webView.CoreWebView2.ExecuteScriptAsync(NODE);
+                    }
                 }
             }
-            viewModel.IdName = id;
-            Node = Node.ToLower();
-            viewModel.ClassName = className;
-            AddFromBrowser(viewModel, id, className, webView, Node);
+            //GC.Collect();
+            return ResultQueryString;
+        }
+        public string FindFileName(string link, string fileType)
+        {
+            string[] CutedWebPageLink = link.Split("/");
+            string ResultQueryString = CutedWebPageLink[CutedWebPageLink.Length - 1];
+            int indexOfFileType = ResultQueryString.Length - fileType.Length;
+            if (!ResultQueryString.Contains(fileType) || ResultQueryString.IndexOf(fileType) != indexOfFileType)
+            {
+                ResultQueryString += fileType;
+            }
+            return ResultQueryString;
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Web_Scraping_Mania.ViewModels
                                                         new ParsePropModel() { ComboText = "Батьківська нода тегу", SelectionFunc = selectionMethods.ParseParentalNode},
                                                         new ParsePropModel() { ComboText = "Всі атрибути тегу", SelectionFunc = selectionMethods.ParseAttributes}  };
             SelectedItem = ParseProperty[0];
-            searchParseFuncs = new SearchParseFuncs();
+            searchParseFuncs = new SearchParseFuncs(viewModel);
 
         }
 
@@ -82,7 +82,7 @@ namespace Web_Scraping_Mania.ViewModels
         {
             get
             {
-                _command = new AsyncRelayCommand(async () => await Task.Run(() => searchParseFuncs.ParseByTag(_mainWindowViewModel, Data, SelectedItem)));
+                _command = new AsyncRelayCommand(async () => await Task.Run(() => searchParseFuncs.ParseByTag(Data, SelectedItem)));
                 return _command;
             }
         }

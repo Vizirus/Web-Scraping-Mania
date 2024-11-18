@@ -1,7 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System.Threading.Tasks;
 using System.Windows;
-
 using Web_Scraping_Mania.ViewModels;
 
 namespace Web_Scraping_Mania.Commands.Functions
@@ -9,11 +8,14 @@ namespace Web_Scraping_Mania.Commands.Functions
     public class SelectionMethods
     {
         private SearchParseFuncs searchParseFuncs { get; set; }
+        private MainWindowViewModel viewModel { get; set; }
+
         public SelectionMethods()
         {
-            searchParseFuncs = new SearchParseFuncs();
+            viewModel = new MainWindowViewModel();//App.hosting.Services.GetRequiredService<MainWindowViewModel>();
+            //searchParseFuncs = new SearchParseFuncs();
         }
-        public async Task ParseByTagInnerHtml(MainWindowViewModel viewMoel, string link, string command)
+        public async Task ParseByTagInnerHtml(string link, string command)
         {
             try
             {
@@ -28,8 +30,18 @@ namespace Web_Scraping_Mania.Commands.Functions
                             resultCode += i.InnerHtml + "\n";
                         }
                     }
-                    MainWindowViewModel mainViewModel = viewMoel;
-                    mainViewModel.SelectedItem.Code = resultCode;
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (viewModel.SelectedHtmlTab is null)
+                        {
+                            MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            viewModel.SelectedHtmlTab.TabItemText = resultCode;
+                            viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                        }
+                    });
                     resultCode = null;
                 }
                 else
@@ -42,7 +54,7 @@ namespace Web_Scraping_Mania.Commands.Functions
                 MessageBox.Show("Такого тегу немає на сайті!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        public async Task ParseByTagOuterHtml(MainWindowViewModel viewMoel, string link, string command)
+        public async Task ParseByTagOuterHtml(string link, string command)
         {
             try
             {
@@ -58,8 +70,18 @@ namespace Web_Scraping_Mania.Commands.Functions
                         }
 
                     }
-                    MainWindowViewModel mainViewModel = viewMoel;
-                    mainViewModel.SelectedItem.Code = resultCode;
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (viewModel.SelectedHtmlTab is null)
+                        {
+                            MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            viewModel.SelectedHtmlTab.TabItemText = resultCode;
+                            viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                        }
+                    });
                     resultCode = null;
                 }
                 else
@@ -72,7 +94,7 @@ namespace Web_Scraping_Mania.Commands.Functions
                 MessageBox.Show("Такого тегу немає на сайті!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        public async Task ParseByInnerText(MainWindowViewModel viewMoel, string link, string command)
+        public async Task ParseByInnerText(string link, string command)
         {
             try
             {
@@ -87,8 +109,19 @@ namespace Web_Scraping_Mania.Commands.Functions
                             resultCode += i.InnerText + "\n";
                         }
                     }
-                    MainWindowViewModel mainViewModel = viewMoel;
-                    mainViewModel.SelectedItem.Code = resultCode;
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+
+                        if (viewModel.SelectedHtmlTab is null)
+                        {
+                            MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            viewModel.SelectedHtmlTab.TabItemText = resultCode;
+                            viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                        }
+                    });
                     resultCode = null;
                 }
                 else
@@ -101,7 +134,7 @@ namespace Web_Scraping_Mania.Commands.Functions
                 MessageBox.Show("Такого тегу немає на сайті!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        public async Task ParseId(MainWindowViewModel viewMoel, string link, string command)
+        public async Task ParseId(string link, string command)
         {
 
             try
@@ -117,8 +150,19 @@ namespace Web_Scraping_Mania.Commands.Functions
                             resultCode += i.Id + "\n";
                         }
                     }
-                    MainWindowViewModel mainViewModel = viewMoel;
-                    mainViewModel.SelectedItem.Code = resultCode;
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+
+                        if (viewModel.SelectedHtmlTab.TabItemText is null)
+                        {
+                            MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            viewModel.SelectedHtmlTab.TabItemText = resultCode;
+                            viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                        }
+                    });
                     resultCode = null;
                 }
                 else
@@ -131,7 +175,7 @@ namespace Web_Scraping_Mania.Commands.Functions
                 MessageBox.Show("Такого тегу немає на сайті!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        public async Task ParseAttributes(MainWindowViewModel viewMoel, string link, string command)
+        public async Task ParseAttributes(string link, string command)
         {
             HtmlNodeCollection HtmlNodeCol = searchParseFuncs.GetCode(command, link);
             string resultAttribute = string.Empty;
@@ -142,8 +186,19 @@ namespace Web_Scraping_Mania.Commands.Functions
                     string[] nodes = i.OuterHtml.Split(">");
                     resultAttribute += nodes[0] + ">" + "\n\n";
                 }
-                MainWindowViewModel mainViewModel = viewMoel;
-                mainViewModel.SelectedItem.Code = resultAttribute;
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+
+                    if (viewModel.SelectedHtmlTab is null)
+                    {
+                        MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        viewModel.SelectedHtmlTab.TabItemText = resultAttribute;
+                        viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                    }
+                });
                 resultAttribute = null;
             }
             else
@@ -152,7 +207,7 @@ namespace Web_Scraping_Mania.Commands.Functions
             }
 
         }
-        public async Task ParseParentalNode(MainWindowViewModel viewMoel, string link, string command)
+        public async Task ParseParentalNode(string link, string command)
         {
             HtmlNodeCollection HtmlNodeCol = searchParseFuncs.GetCode(command, link);
             string resultCode = string.Empty;
@@ -165,8 +220,19 @@ namespace Web_Scraping_Mania.Commands.Functions
                         resultCode += i.ParentNode.OuterHtml + "\n";
                     }
                 }
-                MainWindowViewModel mainViewModel = viewMoel;
-                mainViewModel.SelectedItem.Code = resultCode;
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+
+                    if (viewModel.SelectedHtmlTab is null)
+                    {
+                        MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        viewModel.SelectedHtmlTab.TabItemText = resultCode;
+                        viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                    }
+                });
                 resultCode = null;
             }
             else
@@ -174,7 +240,7 @@ namespace Web_Scraping_Mania.Commands.Functions
                 MessageBox.Show("Запит не видав результатів!", "Іформую!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-        public async Task ParseXPath(MainWindowViewModel viewMoel, string link, string command)
+        public async Task ParseXPath(string link, string command)
         {
             HtmlNodeCollection HtmlNodeCol = searchParseFuncs.GetCode(command, link);
             string resultCode = string.Empty;
@@ -190,8 +256,19 @@ namespace Web_Scraping_Mania.Commands.Functions
                     }
 
                 }
-                MainWindowViewModel mainViewModel = viewMoel;
-                mainViewModel.SelectedItem.Code = resultCode;
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+
+                    if (viewModel.SelectedHtmlTab is null)
+                    {
+                        MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        viewModel.SelectedHtmlTab.TabItemText = resultCode;
+                        viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                    }
+                });
                 resultCode = null;
             }
             else
