@@ -13,21 +13,21 @@
           "Microsoft.NET.Test.Sdk": "17.8.0",
           "coverlet.collector": "6.0.0",
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0",
-          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.22621.34"
+          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.22621.53"
         },
         "runtime": {
           "Find Name Sol1.dll": {}
         }
       },
-      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22621.34": {
+      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22621.53": {
         "runtime": {
           "Microsoft.Windows.SDK.NET.dll": {
-            "assemblyVersion": "10.0.22621.30",
-            "fileVersion": "10.0.22621.34"
+            "assemblyVersion": "10.0.22621.38",
+            "fileVersion": "10.0.22621.52"
           },
           "WinRT.Runtime.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.8.46841"
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.6.47881"
           }
         }
       },
@@ -45,6 +45,14 @@
           "lib/netstandard2.0/HtmlAgilityPack.dll": {
             "assemblyVersion": "1.11.65.0",
             "fileVersion": "1.11.65.0"
+          }
+        }
+      },
+      "LanguageExt.Core/5.0.0-beta-38": {
+        "runtime": {
+          "lib/net8.0/LanguageExt.Core.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
           }
         }
       },
@@ -770,6 +778,7 @@
         "dependencies": {
           "CommunityToolkit.Mvvm": "8.2.0",
           "HtmlAgilityPack": "1.11.65",
+          "LanguageExt.Core": "5.0.0-beta-38",
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
           "Microsoft.Extensions.Hosting": "8.0.0",
           "Microsoft.Web.WebView2": "1.0.2739.15"
@@ -813,7 +822,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22621.34": {
+    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22621.53": {
       "type": "runtimepack",
       "serviceable": false,
       "sha512": ""
@@ -838,6 +847,13 @@
       "sha512": "sha512-Skse4MVlRcHHyP88x+v/uQrMxTPaBIwQodiQ/y59jxs8vHlqTR5M3jt5Wk+csYFnR4rX6I4ndqDji2M8p9kAzw==",
       "path": "htmlagilitypack/1.11.65",
       "hashPath": "htmlagilitypack.1.11.65.nupkg.sha512"
+    },
+    "LanguageExt.Core/5.0.0-beta-38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rfMjKWtePMyhVWHd1O/LjjF1JHq6xPPdXOKCbZSK5AGH7armFVhCVd0Ulwaobar5C+ZzaJBeYwGuFlI0C9GheA==",
+      "path": "languageext.core/5.0.0-beta-38",
+      "hashPath": "languageext.core.5.0.0-beta-38.nupkg.sha512"
     },
     "Microsoft.CodeCoverage/17.8.0": {
       "type": "package",

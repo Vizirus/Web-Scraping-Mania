@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Find Name Sol1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a38944b5ec1c5d505f46460279b52bd72f6e4a4f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb7eb951ff67a534a230b5403ab998d15ba0fdd9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Find Name Sol1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Find Name Sol1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

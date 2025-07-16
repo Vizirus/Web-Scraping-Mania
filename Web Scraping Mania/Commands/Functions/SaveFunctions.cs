@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using LanguageExt;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using Web_Scraping_Mania.Models;
 using Web_Scraping_Mania.ViewModels;
 
@@ -21,143 +23,72 @@ namespace Web_Scraping_Mania.Commands.Functions
             searchParseFuncs = new SearchParseFuncs(viewModel);
         }
 
-        public ObservableCollection<TabItemModel> AppendResourceToTabDAsync(string link, string fileType, string XPath, string saveFilePath, int saveMode)
-        {
-            ObservableCollection<TabItemModel> resultTabs = new ObservableCollection<TabItemModel>();
-            var HrefCollection = searchParseFuncs.GetCode(XPath, link);
-            FormatingFuncs formatingFuncs = new FormatingFuncs();
-            foreach (var i in HrefCollection)
-            {
-                string downloadQuery = String.Empty;
-                if (fileType == ".js")
-                {
-                    downloadQuery = searchParseFuncs.LinkForamtion(link, i.Attributes["src"].Value);
-                }
-                else
-                {
-                    downloadQuery = searchParseFuncs.LinkForamtion(link, i.Attributes["href"].Value);
-                }
-                string filename = saveFilePath + '\\' + searchParseFuncs.FindFileName(downloadQuery, fileType).Replace("?", "");
-                if (saveMode == 0)
-                {
-                    Task task = new Task(async () =>
-                    {
-                        try
-                        {
-                            await DownloadCodeAsync(downloadQuery, filename);
-                            using (StreamReader stream = new StreamReader(filename))
-                            {
-                                Application.Current.Dispatcher.Invoke(() =>
-                                {
-                                    string content = stream.ReadToEnd();
-                                    resultTabs.Add(new TabItemModel(searchParseFuncs.FindFileName(downloadQuery, fileType).Replace("?", ""), formatingFuncs.FormatJS(content)));
-                                    stream.Close();
-                                });
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    });
-                    task.Start();
-                }
-                else
-                {
-                    string code = String.Empty;
-                    Task.Run(async () =>
-                    {
-                        code = await GetCodeStringAsync(downloadQuery);
-                        App.Current.Dispatcher.Invoke(() => resultTabs.Add(new TabItemModel(searchParseFuncs.FindFileName(downloadQuery, fileType).Replace("?", ""), formatingFuncs.FormatJS(code))));
-                    });
-                }
-
-            }
-            //GC.Collect();
-            return resultTabs;
-        }
         public void SaveFunc(TabItemModel tabItem)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text File|*.txt|JavaScript|*.js|Html File|*.html|XML File|*.xml|PHP file|*.php|CSS file|*.css|JS File|*.js";
-            saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.ShowDialog();
-            if (saveFileDialog.FileName != null)
-            {
-                if (tabItem is not null)
-                {
-                    string code = tabItem.TabItemText;
-                    using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
-                    {
-
-                        if (saveFileDialog.FilterIndex == 1 || saveFileDialog.FilterIndex == 2 || saveFileDialog.FilterIndex == 3 || saveFileDialog.FilterIndex == 5 || saveFileDialog.FilterIndex == 6 || saveFileDialog.FilterIndex == 7)
-                        {
-                            writer.Write(code);
-                        }
-                        else if (saveFileDialog.FilterIndex == 4)
-                        {
-                            var htmlDoc = new HtmlDocument();
-                            htmlDoc.LoadHtml(code);
-                            htmlDoc.Save(writer);
-                        }
-                        writer.Close();
-                        writer.Dispose();
-                    }
-                }
-            }
-
-        }
-        private async Task saveEveryBlockAsync(string path, string header, string text)
+            
+        }//Rwrite this function
+        private async Task SaveSelectedBlockAsync(TabItemModel selectedTab)
         {
-            string? errorTabItemTitle = String.Empty;
-            try
+            TextRange saveRange = new TextRange(selectedTab.TabDocument.ContentStart, selectedTab.TabDocument.ContentEnd);
+            await using (StreamWriter fs = new StreamWriter(viewModel.SelectedItem.SavePath))
             {
-
-                errorTabItemTitle = header;
-                string fullPath = path + @"\\" + header;
-                using (StreamWriter writer = new StreamWriter(fullPath))
-                {
-                    await writer.WriteAsync(text);
-                    writer.Close();
-                }
-
+                saveRange.Save(fs.BaseStream, DataFormats.Text);
+                fs.Close();
             }
-            catch
-            {
-                MessageBox.Show($"Під час завантаження файлу {errorTabItemTitle} сталася помилка!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
         }
-        private async Task CallSave(string foloderName, ObservableCollection<TabItemModel> filesCollection)
+        private async Task SaveEveryBlockAsync(ObservableCollection<TabItemModel> collectionModel)
         {
-            foreach (var file in filesCollection)
+            foreach(var model in collectionModel)
             {
-                await saveEveryBlockAsync(foloderName, file.Header, file.TabItemText);
-            }
+                await SaveSelectedBlockAsync(model);
+            } 
         }
         public async Task SaveProjectOrSelected(int mode)
         {
             OpenFolderDialog openFolderDialog = new OpenFolderDialog();
             openFolderDialog.Multiselect = false;
             bool? isChoosed = openFolderDialog.ShowDialog();
+            viewModel.SelectedItem.SavePath = openFolderDialog.FolderName;
+
             if (isChoosed == true)
             {
-                if (mode == 0)
+                try
                 {
-                    if (viewModel.WebSites.Count > 0)
+                    if (mode == 0)
                     {
-                        await CallSave(openFolderDialog.FolderName, viewModel.SelectedItem.HtmlFiles);
-                        await CallSave(openFolderDialog.FolderName, viewModel.SelectedItem.CssFiles);
-                        await CallSave(openFolderDialog.FolderName, viewModel.SelectedItem.Scripts);
-                        MessageBox.Show("Файли було збереженно успішно!", "Інформація", MessageBoxButton.OK, MessageBoxImage.Information);
+                        if (viewModel.WebSites.Count > 0)
+                        {
+                            if(viewModel.SelectedItem == null)
+                            {
+                                MessageBox.Show("Не було обрано сайт, який потрібно зберегти!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else
+                            {
+                                await SaveEveryBlockAsync(viewModel.SelectedItem.HtmlFiles);
+                                await SaveEveryBlockAsync(viewModel.SelectedItem.CssFiles);
+                                await SaveEveryBlockAsync(viewModel.SelectedItem.Scripts);
+                                MessageBox.Show("Файли було збереженно успішно!", "Інформація", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }   
+                        }
+                    }
+                    else if (mode == 1)
+                    {
+                        if(viewModel.SelectedScriptTab is null && viewModel.SelectedCssTab is null && viewModel.SelectedHtmlTab is null)
+                        {
+                            MessageBox.Show("Один з типових файлів (CSS, HTML, JS) не було обрано!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            await SaveSelectedBlockAsync(viewModel.SelectedHtmlTab);
+                            await SaveSelectedBlockAsync(viewModel.SelectedCssTab);
+                            await SaveSelectedBlockAsync(viewModel.SelectedScriptTab);
+                            MessageBox.Show("Файли було збереженно успішно!", "Інформація", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
                     }
                 }
-                else if (mode == 1)
+                catch (Exception ex)
                 {
-                    await saveEveryBlockAsync(openFolderDialog.FolderName, viewModel.SelectedHtmlTab.Header, viewModel.SelectedHtmlTab.TabItemText);
-                    await saveEveryBlockAsync(openFolderDialog.FolderName, viewModel.SelectedCssTab.Header, viewModel.SelectedCssTab.TabItemText);
-                    await saveEveryBlockAsync(openFolderDialog.FolderName, viewModel.SelectedScriptTab.Header, viewModel.SelectedScriptTab.TabItemText);
-                    MessageBox.Show("Файли було збереженно успішно!", "Інформація", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
             }
@@ -171,7 +102,7 @@ namespace Web_Scraping_Mania.Commands.Functions
             httpResponse.Dispose();
             return result;
         }
-        public async Task DownloadCodeAsync(string link, string filePath)
+        public async Task SaveGodeAsync(string link, string filePath)
         {
             HttpClient client = new HttpClient();
 
@@ -253,8 +184,34 @@ namespace Web_Scraping_Mania.Commands.Functions
             }
 
             return comboBoxItem;
+        }//Rewrite this function
+        private async Task AdditionalCodeParsing(ComboBoxItem comboBoxItems, string link, string fileType, string XPath)
+        {
+            var parsedTags = searchParseFuncs.GetCode(XPath, link);
+            string downloadLink = string.Empty;
+            HttpClient client = new HttpClient();
+            foreach (var i in parsedTags)
+            {
+                if (fileType == "css")
+                {
+                    downloadLink = searchParseFuncs.LinkForamtion(link, i.Attributes["href"].Value);
+                }
+                else
+                {
+                    downloadLink = searchParseFuncs.LinkForamtion(link, i.Attributes["src"].Value);
+                }
+                
+                var requestResult = await client.GetAsync(downloadLink);
+                if (requestResult.IsSuccessStatusCode)
+                { 
+                        comboBoxItems.CssFiles.Add(new TabItemModel() { 
+                            TabDocument = new FlowDocument(new Paragraph(new Run(await requestResult.Content.ReadAsStringAsync()))), 
+                            Title = $"{searchParseFuncs.FindFileName(downloadLink)}.{fileType}"
+                        });
+                }
+            }
         }
-        private void doAction(string TabName, string TabLink, string code, string FilePath, int appendMode)
+        public void AddNewTab(string TabName, string TabLink)
         {
             if (TabName == null || TabLink == null)
             {
@@ -262,26 +219,43 @@ namespace Web_Scraping_Mania.Commands.Functions
             }
             else
             {
-                ObservableCollection<TabItemModel> htmlTabs = new ObservableCollection<TabItemModel>() { new TabItemModel(TabName, code) };
-                ObservableCollection<TabItemModel> cssTabs;
-                ObservableCollection<TabItemModel> scriptTabs;
-                cssTabs = AppendResourceToTabDAsync(TabLink, ".css", "//link[contains(@href, '.css')]", FilePath, appendMode);
-                scriptTabs = AppendResourceToTabDAsync(TabLink, ".js", "//script[contains(@src, '.js')]", FilePath, appendMode);
-                Models.ComboBoxItem comboBoxItem = new Models.ComboBoxItem() { Link = TabLink, Title = TabName, HtmlFiles = htmlTabs, CssFiles = cssTabs, Scripts = scriptTabs };
-                viewModel.WebSites.Add(comboBoxItem);
-                viewModel.SelectedItem = viewModel.WebSites[viewModel.WebSites.IndexOf(comboBoxItem)];
-                viewModel.SelectedHtmlTab = htmlTabs[0];
-                viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                string Document = searchParseFuncs.GetAllCode(TabLink);
+                if (Document == null)
+                {
+                    //HTML
+                    string title = searchParseFuncs.GetTitle(TabLink);
+                    ComboBoxItem comboBoxItem = new ComboBoxItem() { Link = TabLink,
+                        Title = TabName,
+                        HtmlFiles = new ObservableCollection<TabItemModel>(),
+                        CssFiles = new ObservableCollection<TabItemModel>(),
+                        Scripts = new ObservableCollection<TabItemModel>()
+                    };
+                    comboBoxItem.HtmlFiles.Add(new TabItemModel()
+                    {
+                        Title = searchParseFuncs.FindFileName(TabLink) + ".html",
+                        TabDocument = new FlowDocument(new Paragraph(new Run(Document)))
+                    });
+
+
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        viewModel.WebSites.Add(comboBoxItem);
+                    });
+                }
             }
         }
-        public void AddNewTab(string TabName, string code, string FilePath, int appendMode, MainWindowViewModel _viewModel, string TabLink = "No Tab Link")
+        public void AddNewTab(string TabName, string TabLink, string FilePath)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            if (TabName == null || TabLink == null)
             {
-                 doAction(TabName, TabLink, code, FilePath, appendMode);
-            });
-            GC.Collect();
-        }//https://uk.wikipedia.org/wiki/%D0%A4%D1%80%D0%B0%D0%BA%D1%86%D1%96%D1%8F_%D0%B2%D0%B8%D0%BA%D0%B8%D0%B4%D1%83
+                MessageBox.Show("Не було введено назву вкладки, або посилання!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                
+            }
+        }
+        
 
     }
 }

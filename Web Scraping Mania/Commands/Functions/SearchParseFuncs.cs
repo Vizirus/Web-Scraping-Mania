@@ -31,21 +31,9 @@ namespace Web_Scraping_Mania.Commands.Functions
         }
         public string GetAllCode(string link)
         {
-            string resultCode = String.Empty;
-            try
-            {
-                HtmlWeb htmlPage = new HtmlWeb();
-                var htmlCode = htmlPage.Load(link);
-                HtmlNode nodeCol = htmlCode.DocumentNode.SelectSingleNode("//*");
-                resultCode += nodeCol.OuterHtml;
-
-            }
-            catch (Exception ex)
-            {
-                resultCode = "Сталася помилка, тому не вдалось спарсити ";
-                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            return resultCode;
+            HtmlWeb htmlPage = new HtmlWeb();
+            var htmlCode = htmlPage.Load(link);
+            return htmlCode.DocumentNode.OuterHtml;
         }
 
         public async Task ParseByTag(string Tag, ParsePropModel selectedItem)
@@ -64,21 +52,7 @@ namespace Web_Scraping_Mania.Commands.Functions
             }
 
         }
-        public void ItemsExchange(ObservableCollection<TabItemModel> tabItemModels, List<TabItemModel> itemModelsSilent)
-        {
-            if (itemModelsSilent.Count != 0)
-            {
-                foreach (var i in itemModelsSilent)
-                {
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        tabItemModels.Add(i);
-                    });
-                }
-                itemModelsSilent.Clear();
-            }
-        }
-        public void FindText(string data, ObservableCollection<TabItemModel> tabItemModels, int searchIndex, List<TabItemModel> itemModelsSilent)
+        /*public void FindText(string data, ObservableCollection<TabItemModel> tabItemModels, int searchIndex, List<TabItemModel> itemModelsSilent)
         {
             string[] tab = { "HTML", "CSS", "JS або PHP" };
             if (tabItemModels.Count > 0)
@@ -128,26 +102,23 @@ namespace Web_Scraping_Mania.Commands.Functions
             {
                 MessageBox.Show("Не було обрано вкладку, у якій треба провести пошук!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+        }*/
         public string GetTitle(string link)
         {
             string result = String.Empty;
-            try
+            HtmlNodeCollection collection = GetCode("//title", link);  
+            if(collection is not null)
             {
-                HtmlNodeCollection collection = GetCode("//title", link);
-                foreach (HtmlNode node in collection)
-                {
-                    result = node.InnerText;
-                }
+                result = collection[0].InnerText;
             }
-            catch
+            else
             {
-                result = "Сталася помилка, не вдалося знайти сторінку!";
+                result = "Не вдалося знайти заголовок!";
             }
             return result;
         }
 
-        public async Task ReturnObjAttribute(Microsoft.Web.WebView2.Wpf.WebView2 webView, OpenPreviewWindowViewModel viewModel)
+        /*public async Task ReturnObjAttribute(Microsoft.Web.WebView2.Wpf.WebView2 webView, OpenPreviewWindowViewModel viewModel)
         {
             FormatingFuncs formatingFuncs = new FormatingFuncs();
 
@@ -169,8 +140,8 @@ namespace Web_Scraping_Mania.Commands.Functions
                 MessageBox.Show("Невдалося спарсити код активного елемента!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-        }
-        public async Task ReturnSelectedTextAtributes(Microsoft.Web.WebView2.Wpf.WebView2 webView, OpenPreviewWindowViewModel viewModel)
+        }*/
+        /*public async Task ReturnSelectedTextAtributes(Microsoft.Web.WebView2.Wpf.WebView2 webView, OpenPreviewWindowViewModel viewModel)
         {
             string result = formatingFuncs.FormatHTML(await webView.CoreWebView2.ExecuteScriptAsync("document.getSelection().anchorNode.parentNode.outerHTML;"));
             string id = await webView.CoreWebView2.ExecuteScriptAsync("document.getSelection().anchorNode.parentNode.id;");
@@ -189,11 +160,11 @@ namespace Web_Scraping_Mania.Commands.Functions
             {
                 MessageBox.Show("Невдалося спарсити код активного елемента!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+        }*/
         public string LinkForamtion(string WebPageLink, string ResourceLink)
         {
             string ResultQueryString = String.Empty;
-            if (ResourceLink.Contains("http"))
+            if (ResourceLink.Contains("http") || ResourceLink.Contains("https"))
             {
                 ResultQueryString = ResourceLink;
             }
@@ -214,23 +185,17 @@ namespace Web_Scraping_Mania.Commands.Functions
                     if (ResultQueryString.Contains("auth"))
                     {
                         ResultQueryString = ResultQueryString.Replace("www", "auth");
-
                     }
                 }
             }
             //GC.Collect();
             return ResultQueryString;
         }
-        public string FindFileName(string link, string fileType)
+        public string FindFileName(string link)
         {
             string[] CutedWebPageLink = link.Split("/");
-            string ResultQueryString = CutedWebPageLink[CutedWebPageLink.Length - 1];
-            int indexOfFileType = ResultQueryString.Length - fileType.Length;
-            if (!ResultQueryString.Contains(fileType) || ResultQueryString.IndexOf(fileType) != indexOfFileType)
-            {
-                ResultQueryString += fileType;
-            }
-            return ResultQueryString;
+            
+            return CutedWebPageLink[CutedWebPageLink.Length-1];
         }
     }
 }

@@ -46,8 +46,8 @@
                 <MenuItem Header="Файл">
                     <MenuItem Header="Відкрити файл" Command="{Binding OpenFile, IsAsync=True}"/>
                     <MenuItem Header="Зберегти проєкт як..." Command="{Binding SaveProjectCommand}"/>
-                    <MenuItem Header="Зберегти обране як..." Command="{Binding SaveSelectedFile}"/>
-                    <MenuItem Header="Зберегти обране у форматах як..." Command="{Binding SaveSelectedAsType}"/>
+                    <MenuItem Header="Зберегти виділені вкладки як..." Command="{Binding SaveSelectedFile}"/>
+                    <MenuItem Header="Зберегти активний файл як..." Command="{Binding SaveSelectedAsType}"/>
                     <MenuItem Header="Викачати код" Command="{Binding DownloadCode}"/>
                 </MenuItem>
             </MenuItem>

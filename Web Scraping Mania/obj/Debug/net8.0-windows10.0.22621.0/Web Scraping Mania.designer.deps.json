@@ -22,6 +22,14 @@
           }
         }
       },
+      "LanguageExt.Core/5.0.0-beta-38": {
+        "runtime": {
+          "lib/net8.0/LanguageExt.Core.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
@@ -477,6 +485,13 @@
       "sha512": "sha512-Skse4MVlRcHHyP88x+v/uQrMxTPaBIwQodiQ/y59jxs8vHlqTR5M3jt5Wk+csYFnR4rX6I4ndqDji2M8p9kAzw==",
       "path": "htmlagilitypack/1.11.65",
       "hashPath": "htmlagilitypack.1.11.65.nupkg.sha512"
+    },
+    "LanguageExt.Core/5.0.0-beta-38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rfMjKWtePMyhVWHd1O/LjjF1JHq6xPPdXOKCbZSK5AGH7armFVhCVd0Ulwaobar5C+ZzaJBeYwGuFlI0C9GheA==",
+      "path": "languageext.core/5.0.0-beta-38",
+      "hashPath": "languageext.core.5.0.0-beta-38.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/8.0.0": {
       "type": "package",

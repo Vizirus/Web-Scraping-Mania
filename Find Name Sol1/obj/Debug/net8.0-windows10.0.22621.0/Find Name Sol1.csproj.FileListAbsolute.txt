@@ -153,3 +153,5 @@ D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Find Name Sol1\o
 D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Find Name Sol1\obj\Debug\net8.0-windows10.0.22621.0\Find Name Sol1.pdb
 D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Find Name Sol1\obj\Debug\net8.0-windows10.0.22621.0\Find Name Sol1.genruntimeconfig.cache
 D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Find Name Sol1\obj\Debug\net8.0-windows10.0.22621.0\ref\Find Name Sol1.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Find Name Sol1\bin\Debug\net8.0-windows10.0.22621.0\LanguageExt.Core.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Find Name Sol1\obj\Debug\net8.0-windows10.0.22621.0\Find Name Sol1.sourcelink.json

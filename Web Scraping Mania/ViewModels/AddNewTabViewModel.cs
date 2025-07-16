@@ -87,15 +87,13 @@ namespace Web_Scraping_Mania.ViewModels
         private CommandBase _addTabCommand;
         private void _addTab()
         {
-            string code = searchParse.GetAllCode(TabLink);
-            string title = searchParse.GetTitle(TabLink);
             if (EnableTitle)
             {
                 title = TabName;
             }
             if (EnableDowmload)
             {
-                saveFuncs.AddNewTab(title, code, FilePath, 0, _mainWindowViewModel, TabLink);
+                saveFuncs.AddNewTab(title, TabLink, code);
             }
             else if (EnableBuffering)
             {
