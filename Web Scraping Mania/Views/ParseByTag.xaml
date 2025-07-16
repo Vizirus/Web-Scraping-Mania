@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Web_Scraping_Mania.Views"
         xmlns:VW ="clr-namespace:Web_Scraping_Mania.ViewModels"
         mc:Ignorable="d"
-        Title="Парсинг по тегам" Height="400" Width="416" ResizeMode="CanMinimize" >
+        Title="Парсинг по тегам" Height="400" Width="400" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

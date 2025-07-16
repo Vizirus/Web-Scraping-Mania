@@ -1,31 +1,31 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\",
+  "WorkspaceRootPath": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|d:\\artem\\\u0444\u0430\u0439\u043B\u0438\\c# code\\asp.net core app\\web scraping mania\\web scraping mania\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|solutionrelative:web scraping mania\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|d:\\artem\\\u0444\u0430\u0439\u043B\u0438\\c# code\\asp.net core app\\web scraping mania\\web scraping mania\\commands\\functions\\savefunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|d:\\artem\\\u0444\u0430\u0439\u043B\u0438\\c# code\\web scraping mania\\web scraping mania\\web scraping mania\\commands\\functions\\savefunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|solutionrelative:web scraping mania\\commands\\functions\\savefunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|d:\\artem\\\u0444\u0430\u0439\u043B\u0438\\c# code\\asp.net core app\\web scraping mania\\web scraping mania\\commands\\functions\\searchparsefuncs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|solutionrelative:web scraping mania\\commands\\functions\\searchparsefuncs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|d:\\artem\\\u0444\u0430\u0439\u043B\u0438\\c# code\\web scraping mania\\web scraping mania\\web scraping mania\\viewmodels\\addnewtabviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|solutionrelative:web scraping mania\\viewmodels\\addnewtabviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|d:\\artem\\\u0444\u0430\u0439\u043B\u0438\\c# code\\asp.net core app\\web scraping mania\\web scraping mania\\viewmodels\\addnewtabviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|solutionrelative:web scraping mania\\viewmodels\\addnewtabviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|d:\\artem\\\u0444\u0430\u0439\u043B\u0438\\c# code\\web scraping mania\\web scraping mania\\web scraping mania\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|solutionrelative:web scraping mania\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|d:\\artem\\\u0444\u0430\u0439\u043B\u0438\\c# code\\web scraping mania\\web scraping mania\\web scraping mania\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4B257B62-82FB-49F4-AE85-6322445796B5}|Web Scraping Mania\\Web Scraping Mania.csproj|solutionrelative:web scraping mania\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 1,
+      "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 200,
+          "DockedWidth": 347,
           "SelectedChildIndex": 5,
           "Children": [
             {
@@ -46,56 +46,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SearchParseFuncs.cs",
-              "DocumentMoniker": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Commands\\Functions\\SearchParseFuncs.cs",
-              "RelativeDocumentMoniker": "Web Scraping Mania\\Commands\\Functions\\SearchParseFuncs.cs",
-              "ToolTip": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Commands\\Functions\\SearchParseFuncs.cs",
-              "RelativeToolTip": "Web Scraping Mania\\Commands\\Functions\\SearchParseFuncs.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAwwBoAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "AddNewTabViewModel.cs",
+              "DocumentMoniker": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\ViewModels\\AddNewTabViewModel.cs",
+              "RelativeDocumentMoniker": "Web Scraping Mania\\ViewModels\\AddNewTabViewModel.cs",
+              "ToolTip": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\ViewModels\\AddNewTabViewModel.cs",
+              "RelativeToolTip": "Web Scraping Mania\\ViewModels\\AddNewTabViewModel.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAuwGsAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-08T14:32:25.171Z"
+              "WhenOpened": "2024-04-06T18:02:16.199Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainWindowViewModel.cs",
-              "DocumentMoniker": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\ViewModels\\MainWindowViewModel.cs",
-              "RelativeDocumentMoniker": "Web Scraping Mania\\ViewModels\\MainWindowViewModel.cs",
-              "ToolTip": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\ViewModels\\MainWindowViewModel.cs",
-              "RelativeToolTip": "Web Scraping Mania\\ViewModels\\MainWindowViewModel.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAUwFIAAAAWAAAAAAAAAA==",
+              "Title": "SaveFunctions.cs",
+              "DocumentMoniker": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Commands\\Functions\\SaveFunctions.cs",
+              "RelativeDocumentMoniker": "Web Scraping Mania\\Commands\\Functions\\SaveFunctions.cs",
+              "ToolTip": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Commands\\Functions\\SaveFunctions.cs",
+              "RelativeToolTip": "Web Scraping Mania\\Commands\\Functions\\SaveFunctions.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAqwCQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T19:36:36.309Z",
+              "WhenOpened": "2024-04-06T17:19:57.568Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SaveFunctions.cs",
-              "DocumentMoniker": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Commands\\Functions\\SaveFunctions.cs",
-              "RelativeDocumentMoniker": "Web Scraping Mania\\Commands\\Functions\\SaveFunctions.cs",
-              "ToolTip": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Commands\\Functions\\SaveFunctions.cs",
-              "RelativeToolTip": "Web Scraping Mania\\Commands\\Functions\\SaveFunctions.cs",
-              "ViewState": "AgIAAOUAAAAAAAAAAAAAAF4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T19:35:00.198Z"
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Views\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Web Scraping Mania\\Views\\MainWindow.xaml",
+              "ToolTip": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "Web Scraping Mania\\Views\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-03T18:23:47.45Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AddNewTabViewModel.cs",
-              "DocumentMoniker": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\ViewModels\\AddNewTabViewModel.cs",
-              "RelativeDocumentMoniker": "Web Scraping Mania\\ViewModels\\AddNewTabViewModel.cs",
-              "ToolTip": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\ViewModels\\AddNewTabViewModel.cs",
-              "RelativeToolTip": "Web Scraping Mania\\ViewModels\\AddNewTabViewModel.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAuwFgAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "MainWindowViewModel.cs",
+              "DocumentMoniker": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\ViewModels\\MainWindowViewModel.cs",
+              "RelativeDocumentMoniker": "Web Scraping Mania\\ViewModels\\MainWindowViewModel.cs",
+              "ToolTip": "D:\\Artem\\\u0424\u0430\u0439\u043B\u0438\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\ViewModels\\MainWindowViewModel.cs",
+              "RelativeToolTip": "Web Scraping Mania\\ViewModels\\MainWindowViewModel.cs",
+              "ViewState": "AgIAAGoBAAAAAAAAAAAAANsAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T19:34:26.838Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "WhenOpened": "2024-04-03T16:15:18.093Z"
             }
           ]
         }

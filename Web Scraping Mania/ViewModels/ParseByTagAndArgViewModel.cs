@@ -60,7 +60,7 @@ namespace Web_Scraping_Mania.ViewModels
         public ParseByTagAndArgViewModel(MainWindowViewModel viewModel)
         {
             _mainWindowViewModel = viewModel;
-            selectionMethods = new SelectionMethods();
+            selectionMethods = new SelectionMethods(viewModel);
             ParseProperty = new List<ParsePropModel>() {new ParsePropModel() {ComboText = "Html всередині тегу/тегів", SelectionFunc = selectionMethods.ParseByTagInnerHtml},
                                                         new ParsePropModel() { ComboText = "Весь Html тегу/тегів", SelectionFunc = selectionMethods.ParseByTagOuterHtml},
                                                         new ParsePropModel() { ComboText = "Текст всередині тегу/тегів", SelectionFunc = selectionMethods.ParseByInnerText},

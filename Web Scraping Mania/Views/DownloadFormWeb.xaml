@@ -8,16 +8,15 @@
         Title="Викачати код за посиланням" Height="300" Width="300" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="59*"/>
-            <ColumnDefinition Width="166*"/>
-            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Width="200" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" Text="{Binding Link}" Grid.ColumnSpan="2"/>
-        <TextBlock Text="Посилання" FontSize="12" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" Grid.Column="2"/>
-        <Button Content="Викачати" Width="100" Height="30" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="61,0,0,0" Command="{Binding DownloadCommand}" Grid.Column="1"/>
+        <TextBox Width="200" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" Text="{Binding Link}"/>
+        <TextBlock Text="Посилання" FontSize="12" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" Grid.Column="1"/>
+        <Button Content="Викачати" Width="100" Height="30" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Command="{Binding DownloadCommand}"/>
     </Grid>
 </Window>

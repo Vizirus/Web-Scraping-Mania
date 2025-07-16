@@ -14,7 +14,6 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
-using HtmlAgilityPack;
 
 namespace Web_Scraping_Mania.Commands.Functions
 {
@@ -25,12 +24,41 @@ namespace Web_Scraping_Mania.Commands.Functions
         
         public void AppendResourceToTabDAsyncGetCode()
         {
-            MainWindowViewModel viewModelq  = new MainWindowViewModel();
-            SearchParseFuncs searchParseFuncs = new SearchParseFuncs(viewModelq);
-            string result = searchParseFuncs.LinkForamtion("https://www.netacad.com/portal/learning", "/auth/resources/lvhtw/login/skillsforall-theme/node_modules/patternfly/dist/css/patternfly-additions.min.css");
-            //Assert.AreEqual(result, "https://auth.netacad.com/auth/resources/lvhtw/login/skillsforall-theme/node_modules/patternfly/dist/css/patternfly-additions.min.css");
-           Debug.WriteLine(result);
+            ObservableCollection<bool> bools = new ObservableCollection<bool>() { false, false, false };
+            Debug.WriteLine(bools[0]);
+            changeBool(bools[0]);
+            Debug.WriteLine(bools[0]);
         }
-      
+        List<int[]> findText(string data, string test, int[] dictCount)
+        {
+            List<int[]> selectionCollection = new List<int[]>();
+            string text = test;
+                if (text.Contains(data) == true)
+                {
+                    foreach (Match match in Regex.Matches(text, data))
+                    {
+                        selectionCollection.Add([match.Index, match.Value.Length]);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Не вдалося знайти слово або символ в тексті!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                dictCount[1] = selectionCollection.Count;
+            return selectionCollection;
+        }
+        private void plusSelection(List<int[]> selectionArr, int[] dictCount)
+        {
+            dictCount[0] += 1;
+            if (dictCount[0] > dictCount[1])
+            {
+                dictCount[0] = dictCount[1];
+            }
+            Debug.WriteLine(dictCount[0]);
+        }
+        void changeBool(bool en)
+        {
+            en = true;
+        }
     }
 }

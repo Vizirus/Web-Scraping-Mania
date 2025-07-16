@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Web_Scraping_Mania.Views"
         xmlns:WV="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
-        Title="Прев'ю" Height="450" Width="800" >
+        Title="Прев'ю" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

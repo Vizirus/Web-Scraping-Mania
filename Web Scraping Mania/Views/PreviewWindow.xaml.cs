@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Web.WebView2.Core;
+﻿using System;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.Wpf;
 using Web_Scraping_Mania.Commands.Functions;
 using Web_Scraping_Mania.ViewModels;
 
@@ -17,7 +19,7 @@ namespace Web_Scraping_Mania.Views
             InitializeComponent();
             this.DataContext = App.hosting.Services.GetRequiredService<OpenPreviewWindowViewModel>();
             MainWindowViewModel viewModel = App.hosting.Services.GetRequiredService<MainWindowViewModel>();
-            //searchParseFuncs = new SearchParseFuncs();
+            searchParseFuncs = new SearchParseFuncs(viewModel);
         }
         private void WebViewBrowser_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {

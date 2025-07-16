@@ -14,11 +14,5 @@ namespace Web_Scraping_Mania.Views
             this.DataContext = App.hosting.Services.GetRequiredService<AddNewTabViewModel>();
             InitializeComponent();
         }
-
-        private void Window_Closed(object sender, System.EventArgs e)
-        {
-            AddNewTabViewModel? addNewTabViewModel = this.DataContext as AddNewTabViewModel;
-            addNewTabViewModel.Reset();
-        }
     }
 }

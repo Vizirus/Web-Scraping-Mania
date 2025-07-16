@@ -9,7 +9,7 @@ namespace Web_Scraping_Mania
     public partial class App : Application
     {
 
-        public static IHost hosting { get; private set; }
+        public static IHost hosting { get; set; }
         public App()
         {
             hosting = Host.CreateDefaultBuilder().ConfigureServices((hostConext, services) =>
@@ -24,7 +24,6 @@ namespace Web_Scraping_Mania
         }
         protected override async void OnStartup(StartupEventArgs e)
         {
-
             await hosting.StartAsync();
             var window = hosting.Services.GetRequiredService<MainWindow>();
             window.Show();
@@ -38,4 +37,5 @@ namespace Web_Scraping_Mania
         }
     }
 }
+
 
