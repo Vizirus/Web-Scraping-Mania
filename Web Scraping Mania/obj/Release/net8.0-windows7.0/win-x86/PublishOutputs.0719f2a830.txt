@@ -1,0 +1,9 @@
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Web Scraping Mania.pdb
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\runtimes\win-x86\native\WebView2Loader.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\D3DCompiler_47_cor3.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\PenImc_cor3.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\PresentationNative_cor3.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\vcruntime140_cor3.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\wpfgfx_cor3.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\WebView2Loader.dll
+D:\Artem\Файли\C# code\ASP.NET core app\Web Scraping Mania\Release\Web Scraping Mania.exe

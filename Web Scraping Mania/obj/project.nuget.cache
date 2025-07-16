@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Heem2Ql05mY=",
+  "dgSpecHash": "ZRycw4e4E4c=",
   "success": true,
-  "projectFilePath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
+  "projectFilePath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\htmlagilitypack\\1.11.60\\htmlagilitypack.1.11.60.nupkg.sha512",

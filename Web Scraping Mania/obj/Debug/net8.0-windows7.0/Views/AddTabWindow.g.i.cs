@@ -54,7 +54,7 @@ namespace Web_Scraping_Mania.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Web Scraping Mania;component/views/addtabwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Web Scraping Mania;V1.0.0.0;component/views/addtabwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\AddTabWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

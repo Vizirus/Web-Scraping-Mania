@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Bvd7V7iEM4c=",
+  "dgSpecHash": "wAX2HrVAdDo=",
   "success": true,
-  "projectFilePath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj",
+  "projectFilePath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",

@@ -53,7 +53,7 @@ namespace Web_Scraping_Mania.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Web Scraping Mania;component/views/downloadformweb.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Web Scraping Mania;V1.0.0.0;component/views/downloadformweb.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\DownloadFormWeb.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

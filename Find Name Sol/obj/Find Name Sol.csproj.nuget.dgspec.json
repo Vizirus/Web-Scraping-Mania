@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj": {}
+    "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj": {}
   },
   "projects": {
-    "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj": {
+    "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj",
+        "projectUniqueName": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj",
         "projectName": "Find Name Sol",
-        "projectPath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj",
+        "projectPath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Find Name Sol\\Find Name Sol.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Find Name Sol\\obj\\",
+        "outputPath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Find Name Sol\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\INSTALL\\Visual studio\\SDK\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows7.0",
             "projectReferences": {
-              "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj": {
-                "projectPath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj"
+              "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj": {
+                "projectPath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj"
               }
             }
           }
@@ -92,14 +92,14 @@
         }
       }
     },
-    "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj": {
+    "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
+        "projectUniqueName": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
         "projectName": "Web Scraping Mania",
-        "projectPath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
+        "projectPath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\obj\\",
+        "outputPath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\INSTALL\\Visual studio\\SDK\\NuGetPackages"

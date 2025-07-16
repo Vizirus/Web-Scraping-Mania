@@ -1936,11 +1936,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
+      "projectUniqueName": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
       "projectName": "Web Scraping Mania",
-      "projectPath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
+      "projectPath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "D:\\Artem\\Файли\\C# code\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania\\obj\\",
+      "outputPath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\INSTALL\\Visual studio\\SDK\\NuGetPackages"
