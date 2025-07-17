@@ -1,7 +1,7 @@
 # Web scraping mania Capable web scraping software. 
 (Project description belowe)
 
-# Repository description
+## Repository description
 
 master - branch with currently working code
 work_in_progress - special branch which contains code, which is currently in progress
