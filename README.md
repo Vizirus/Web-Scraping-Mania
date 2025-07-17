@@ -12,9 +12,9 @@ Developed to parse and analyze code of the web page.
 Originaly made for scientific research regarding web scraping, but is actually rewritten to become full-scale software. 
 
 ## Results
-Awards for the first place in Small Scientific Research competition.
-Awards at regional olympics from IT.
-Award for the first place at "EcoSoft-2024", All-Ukrianian competition based on "Infomatrix-2024" international competition
+- Awards for the first place in Small Scientific Research competition.
+- Awards at regional olympics from IT.
+- Award for the first place at "EcoSoft-2024", All-Ukrianian competition based on "Infomatrix-2024" international competition
 
 ## Capabilities (current) 
 - Parsing of simple website 
