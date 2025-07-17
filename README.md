@@ -4,7 +4,7 @@
 ## Repository description
 
 master - branch with currently working code 
-work_in_progress - special branch which contains code, which is currently in progress
+<p>work_in_progress - special branch which contains code, which is currently in progress</p>
 
 
 ## Project description
