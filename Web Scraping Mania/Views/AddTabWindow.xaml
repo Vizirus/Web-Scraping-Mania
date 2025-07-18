@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Web_Scraping_Mania.Views"
         xmlns:VW="clr-namespace:Web_Scraping_Mania.ViewModels"
         mc:Ignorable="d"
-        Title="Додати вкладку" Height="450" Width="552" ResizeMode="CanMinimize">
+        Title="Додати вкладку" Height="450" Width="552" ResizeMode="CanMinimize" Closed="Window_Closed" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275*"/>

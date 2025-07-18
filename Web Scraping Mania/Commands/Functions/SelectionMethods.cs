@@ -1,8 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using Web_Scraping_Mania.ViewModels;
 
 namespace Web_Scraping_Mania.Commands.Functions
@@ -11,10 +9,11 @@ namespace Web_Scraping_Mania.Commands.Functions
     {
         private SearchParseFuncs searchParseFuncs { get; set; }
         private MainWindowViewModel viewModel { get; set; }
-        public SelectionMethods(MainWindowViewModel viewModelMain)
+
+        public SelectionMethods()
         {
-            viewModel = viewModelMain;
-            searchParseFuncs = new SearchParseFuncs(viewModelMain);
+            viewModel = new MainWindowViewModel();//App.hosting.Services.GetRequiredService<MainWindowViewModel>();
+            //searchParseFuncs = new SearchParseFuncs();
         }
         public async Task ParseByTagInnerHtml(string link, string command)
         {
@@ -33,14 +32,13 @@ namespace Web_Scraping_Mania.Commands.Functions
                     }
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        if (viewModel.SelectedHtmlTab.Content is null)
+                        if (viewModel.SelectedHtmlTab is null)
                         {
                             MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
-                            TextBox textBox = viewModel.SelectedHtmlTab.Content as TextBox;
-                            textBox.Text = resultCode;
+                            viewModel.SelectedHtmlTab.TabItemText = resultCode;
                             viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
                         }
                     });
@@ -74,14 +72,13 @@ namespace Web_Scraping_Mania.Commands.Functions
                     }
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                    if (viewModel.SelectedHtmlTab.Content is null)
+                        if (viewModel.SelectedHtmlTab is null)
                         {
                             MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
-                            TextBox textBox = viewModel.SelectedHtmlTab.Content as TextBox;
-                            textBox.Text = resultCode;
+                            viewModel.SelectedHtmlTab.TabItemText = resultCode;
                             viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
                         }
                     });
@@ -114,15 +111,14 @@ namespace Web_Scraping_Mania.Commands.Functions
                     }
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        
-                        if (viewModel.SelectedHtmlTab.Content is null)
+
+                        if (viewModel.SelectedHtmlTab is null)
                         {
                             MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
-                            TextBox textBox = viewModel.SelectedHtmlTab.Content as TextBox;
-                            textBox.Text = resultCode;
+                            viewModel.SelectedHtmlTab.TabItemText = resultCode;
                             viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
                         }
                     });
@@ -156,18 +152,16 @@ namespace Web_Scraping_Mania.Commands.Functions
                     }
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        
-                        if (viewModel.SelectedHtmlTab.Content != null)
-                            if (viewModel.SelectedHtmlTab.Content is null)
-                            {
-                                MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                            else
-                            {
-                                TextBox textBox = viewModel.SelectedHtmlTab.Content as TextBox;
-                                textBox.Text = resultCode;
-                                viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
-                            }
+
+                        if (viewModel.SelectedHtmlTab.TabItemText is null)
+                        {
+                            MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            viewModel.SelectedHtmlTab.TabItemText = resultCode;
+                            viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
+                        }
                     });
                     resultCode = null;
                 }
@@ -194,15 +188,14 @@ namespace Web_Scraping_Mania.Commands.Functions
                 }
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    
-                    if (viewModel.SelectedHtmlTab.Content is null)
+
+                    if (viewModel.SelectedHtmlTab is null)
                     {
                         MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        TextBox textBox = viewModel.SelectedHtmlTab.Content as TextBox;
-                        textBox.Text = resultAttribute;
+                        viewModel.SelectedHtmlTab.TabItemText = resultAttribute;
                         viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
                     }
                 });
@@ -229,15 +222,14 @@ namespace Web_Scraping_Mania.Commands.Functions
                 }
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    
-                    if (viewModel.SelectedHtmlTab.Content is null)
+
+                    if (viewModel.SelectedHtmlTab is null)
                     {
                         MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        TextBox textBox = viewModel.SelectedHtmlTab.Content as TextBox;
-                        textBox.Text = resultCode;
+                        viewModel.SelectedHtmlTab.TabItemText = resultCode;
                         viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
                     }
                 });
@@ -266,15 +258,14 @@ namespace Web_Scraping_Mania.Commands.Functions
                 }
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    
-                    if (viewModel.SelectedHtmlTab.Content is null)
+
+                    if (viewModel.SelectedHtmlTab is null)
                     {
                         MessageBox.Show("Вкладка не була обрана!", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        TextBox textBox = viewModel.SelectedHtmlTab.Content as TextBox;
-                        textBox.Text = resultCode;
+                        viewModel.SelectedHtmlTab.TabItemText = resultCode;
                         viewModel.OnPropertyChanged(nameof(viewModel.SelectedHtmlTab));
                     }
                 });

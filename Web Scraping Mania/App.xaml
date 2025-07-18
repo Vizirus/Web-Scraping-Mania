@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Web_Scraping_Mania"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
-         
+      
     </Application.Resources>
 </Application>

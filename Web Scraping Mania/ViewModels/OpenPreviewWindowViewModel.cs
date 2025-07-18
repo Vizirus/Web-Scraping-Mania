@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Web_Scraping_Mania.ViewModels
+﻿namespace Web_Scraping_Mania.ViewModels
 {
-    public class OpenPreviewWindowViewModel: ShellViewModel
+    public class OpenPreviewWindowViewModel : ShellViewModel
     {
         private MainWindowViewModel windowViewModel;
         public OpenPreviewWindowViewModel(MainWindowViewModel mainWindow)

@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Web_Scraping_Mania.Commands;
 using Web_Scraping_Mania.Commands.Functions;
 
 namespace Web_Scraping_Mania.ViewModels
@@ -48,7 +50,7 @@ namespace Web_Scraping_Mania.ViewModels
         public string FilePath
         {
             get { return _filePath; }
-            set { _filePath = value;  OnPropertyChanged(nameof(FilePath)); }
+            set { _filePath = value; OnPropertyChanged(nameof(FilePath)); }
         }
 
         private bool _EnableTitle = false;
@@ -67,8 +69,8 @@ namespace Web_Scraping_Mania.ViewModels
         public bool EnableDowmload
         {
             get { return _enableDowmload; }
-            set 
-            { 
+            set
+            {
                 _enableDowmload = value;
                 OnPropertyChanged(nameof(EnableDowmload));
             }
@@ -82,32 +84,39 @@ namespace Web_Scraping_Mania.ViewModels
         }
 
 
-        private AsyncRelayCommand _addTabCommand;
-        private async Task _addTab()
+        private CommandBase _addTabCommand;
+        private void _addTab()
         {
-            string code = searchParse.GetAllCode(TabLink);
-            string title = searchParse.GetTitle(TabLink);
             if (EnableTitle)
             {
                 title = TabName;
             }
             if (EnableDowmload)
             {
-                await saveFuncs.AddNewTab(title, code, FilePath, 0, TabLink);
+                saveFuncs.AddNewTab(title, TabLink, code);
             }
-            else if(EnableBuffering)
+            else if (EnableBuffering)
             {
-                await saveFuncs.AddNewTab(title, code, FilePath, 1, TabLink);
+                saveFuncs.AddNewTab(title, code, FilePath, 1, _mainWindowViewModel, TabLink);
             }
-            
+
         }
-        public IAsyncRelayCommand AddTabCommand
+        public ICommand AddTabCommand
         {
             get
             {
-                _addTabCommand = new AsyncRelayCommand(param => Task.Run(_addTab));
+                _addTabCommand = new CommandBase(param => Task.Factory.StartNew(_addTab), param => true);
                 return _addTabCommand;
             }
+        }
+        public void Reset()
+        {
+            TabName = string.Empty;
+            TabLink = string.Empty;
+            EnableDowmload = false;
+            EnableBuffering = true;
+            EnableTitle = false;
+            FilePath = string.Empty;
         }
         //https://www.w3schools.com/xml/xpath_intro.asp
     }

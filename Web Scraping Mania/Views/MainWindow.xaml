@@ -4,15 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Web_Scraping_Mania"
+        xmlns:VM="clr-namespace:Web_Scraping_Mania.Models"
         mc:Ignorable="d"
-        Title="Scraping Mania" Height="470" Width="876" WindowState="Maximized">
+        Title="Scraping Mania" Height="470" Width="930" WindowState="Maximized">
     <Window.Resources>
         <BitmapImage x:Key="UpdateIcon" UriSource="Icon\update-12.png"/>
+        <BitmapImage x:Key="NextButIcon" UriSource="Icon\NextBut.png"/>
+        <BitmapImage x:Key="PreviousButIcon" UriSource="Icon\PreviousBut.png"/>
+        <DataTemplate x:Key="TabControlsHeaderDT">
+            <TextBlock Text="{Binding Path=Header}" FontSize="16"/>
+        </DataTemplate>
+        <DataTemplate x:Key="TabControlContentDT">
+            <TextBox Text="{Binding Path=TabItemText}" VerticalScrollBarVisibility="Visible" VM:TextBoxFocusAP.IsFocused="{Binding Path=IsTextBoxFocused, Mode=TwoWay}" HorizontalScrollBarVisibility="Visible"/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="31"/>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -21,11 +30,11 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="6.5*"/>
+            <ColumnDefinition Width="6.5*"/>
+            <ColumnDefinition Width="6.5*"/>
         </Grid.ColumnDefinitions>
         <!--Menu-->
         <Menu VerticalAlignment="Center" FontSize="15" Grid.ColumnSpan="8" Height="22">
@@ -37,7 +46,8 @@
                 <MenuItem Header="Файл">
                     <MenuItem Header="Відкрити файл" Command="{Binding OpenFile, IsAsync=True}"/>
                     <MenuItem Header="Зберегти проєкт як..." Command="{Binding SaveProjectCommand}"/>
-                    <MenuItem Header="Зберегти обране як..." Command="{Binding SaveSelectedFile}"/>
+                    <MenuItem Header="Зберегти виділені вкладки як..." Command="{Binding SaveSelectedFile}"/>
+                    <MenuItem Header="Зберегти активний файл як..." Command="{Binding SaveSelectedAsType}"/>
                     <MenuItem Header="Викачати код" Command="{Binding DownloadCode}"/>
                 </MenuItem>
             </MenuItem>
@@ -57,7 +67,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Grid.Column="2" Grid.Row="1" Width="30" Height="25" HorizontalAlignment="Center" Margin="5,2,5,2" VerticalAlignment="Center" Command="{Binding UpdateButton}">
+        <Button Grid.Column="2" Grid.Row="1"  HorizontalAlignment="Center" Margin="5,2,5,2" VerticalAlignment="Center" Command="{Binding UpdateButton}">
             <Button.Content>
                 <Image Source="{Binding Source={StaticResource UpdateIcon}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
             </Button.Content>
@@ -66,50 +76,86 @@
         <Button Grid.Column="4" Grid.Row="1" Content="Знайти в коді" FontSize="15" Command="{Binding TextSelection}"/>
         <Grid Grid.Column="5" Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="0.8*"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0.8*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="-" FontSize="15" Command="{Binding MinusSelectionHtml}" IsEnabled="{Binding Path=IsEnabled[0]}"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                <Label FontSize="15" Content="{Binding Path=DictCount[0][2]}"/>
+            <TextBlock Grid.Column="0" Text="HTML:" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,10,0"/>
+            <Button Grid.Column="1" FontSize="15" Command="{Binding MinusSelectionHtml}" IsEnabled="{Binding Path=IsEnabled[0]}">
+                <Button.Content>
+                    <Image Source="{Binding Source={StaticResource PreviousButIcon}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </Button.Content>
+            </Button>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Label FontSize="15" Content="{Binding SelectedHtmlTab.SearchCount[2]}"/>
                 <Label FontSize="15" Content="/"/>
-                <Label FontSize="15" Content="{Binding Path=DictCount[0][1]}"/>
+                <Label FontSize="15" Content="{Binding SelectedHtmlTab.SearchCount[1]}"/>
             </StackPanel>
-            <Button Grid.Column="2" Content="+" FontSize="15" Command="{Binding PlusSelectionHtml}" IsEnabled="{Binding Path=IsEnabled[0]}"/>
+            <Button Grid.Column="3" FontSize="15" Command="{Binding PlusSelectionHtml}" IsEnabled="{Binding Path=IsEnabled[0]}">
+                <Button.Content>
+                    <Image Source="{Binding Source={StaticResource NextButIcon}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </Button.Content>
+            </Button>
         </Grid>
         <Grid Grid.Column="6" Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="0.8*"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0.8*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="-" FontSize="15" Command="{Binding MinusSelectionCss}" IsEnabled="{Binding Path=IsEnabled[1]}"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                <Label FontSize="15" Content="{Binding DictCount[1][2]}"/>
+            <TextBlock Grid.Column="0" Text="CSS:" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,10,0"/>
+
+            <Button Grid.Column="1" FontSize="15" Command="{Binding MinusSelectionCss}" IsEnabled="{Binding Path=IsEnabled[1]}">
+                <Button.Content>
+                    <Image Source="{Binding Source={StaticResource PreviousButIcon}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </Button.Content>
+            </Button>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Label FontSize="15" Content="{Binding SelectedCssTab.SearchCount[2]}"/>
                 <Label FontSize="15" Content="/"/>
-                <Label FontSize="15" Content="{Binding DictCount[1][1]}"/>
+                <Label FontSize="15" Content="{Binding SelectedCssTab.SearchCount[1]}"/>
             </StackPanel>
-            <Button Grid.Column="2" Content="+" FontSize="15" Command="{Binding PlusSelectionCss}" IsEnabled="{Binding Path=IsEnabled[1]}"/>
+            <Button Grid.Column="3" FontSize="15" Command="{Binding PlusSelectionCss}" IsEnabled="{Binding Path=IsEnabled[1]}">
+                <Button.Content>
+                    <Image Source="{Binding Source={StaticResource NextButIcon}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </Button.Content>
+            </Button>
         </Grid>
         <Grid Grid.Column="7" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="0.8*"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0.8*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="-" FontSize="15" Command="{Binding MinusSelectionScript}" IsEnabled="{Binding Path=IsEnabled[2]}"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                <Label FontSize="15" Content="{Binding DictCount[2][2]}"/>
+            <TextBlock Grid.Column="0" Text="JS:" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,10,0"/>
+
+            <Button Grid.Column="1" FontSize="15" Command="{Binding MinusSelectionScript}" IsEnabled="{Binding Path=IsEnabled[2]}" Grid.RowSpan="2">
+                <Button.Content>
+                    <Image Source="{Binding Source={StaticResource PreviousButIcon}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </Button.Content>
+            </Button>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.RowSpan="2" >
+                <Label FontSize="15" Content="{Binding SelectedScriptTab.SearchCount[2]}"/>
                 <Label FontSize="15" Content="/"/>
-                <Label FontSize="15" Content="{Binding DictCount[2][1]}"/>
+                <Label FontSize="15" Content="{Binding SelectedScriptTab.SearchCount[1]}"/>
             </StackPanel>
-            <Button Grid.Column="2" Content="+" FontSize="15" Command="{Binding PlusSelectionScript}" IsEnabled="{Binding Path=IsEnabled[2]}"/>
+            <Button Grid.Column="3" FontSize="15" Command="{Binding PlusSelectionScript}" IsEnabled="{Binding Path=IsEnabled[2]}" Grid.RowSpan="2">
+                <Button.Content>
+                    <Image Source="{Binding Source={StaticResource NextButIcon}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </Button.Content>
+            </Button>
         </Grid>
         <!--Code boxes-->
-        <TabControl x:Name="HtmlCodeHandler" Grid.ColumnSpan="8" Grid.Row="2" ItemsSource="{Binding SelectedItem.HtmlFiles}" SelectedItem="{Binding SelectedHtmlTab}"/>
-        <TabControl x:Name="CssCodeHandler" Grid.ColumnSpan="8" Grid.Row="3" ItemsSource="{Binding SelectedItem.CssFiles}" SelectedItem="{Binding SelectedCssTab}"/>
-        <TabControl x:Name="ScriptsHandler" Grid.ColumnSpan="8" Grid.Row="4" ItemsSource="{Binding SelectedItem.Scripts}" SelectedItem="{Binding SelectedScriptTab}"/>
+        <TabControl x:Name="HtmlCodeHandler" Grid.ColumnSpan="8" Grid.Row="2" FontSize="{Binding FontSize}" ItemsSource="{Binding SelectedItem.HtmlFiles}" SelectedItem="{Binding SelectedHtmlTab}"  ContentTemplate="{Binding Source={StaticResource TabControlContentDT}}"/>
+        <TabControl x:Name="CssCodeHandler" Grid.ColumnSpan="8" Grid.Row="3" FontSize="{Binding FontSize}" ItemsSource="{Binding SelectedItem.CssFiles}" SelectedItem="{Binding SelectedCssTab}"  ContentTemplate="{Binding Source={StaticResource TabControlContentDT}}"/>
+        <TabControl x:Name="ScriptsHandler" Grid.ColumnSpan="8" Grid.Row="4" FontSize="{Binding FontSize}" ItemsSource="{Binding SelectedItem.Scripts}" SelectedItem="{Binding SelectedScriptTab}"  ContentTemplate="{Binding Source={StaticResource TabControlContentDT}}"/>
 
     </Grid>
 

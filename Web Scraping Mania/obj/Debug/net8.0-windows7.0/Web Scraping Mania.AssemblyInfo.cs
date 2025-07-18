@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Web Scraping Mania")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23d81b27c63680fb907c0e30058b4dcc7fb8b94d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62a1426c625638d93d13f818bf072d28ca262ce2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Web Scraping Mania")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Web Scraping Mania")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

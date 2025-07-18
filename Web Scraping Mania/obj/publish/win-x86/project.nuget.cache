@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JH0v/XUtd3s=",
+  "dgSpecHash": "Moa51TXLQOi8ptuY4rZZtkFseZPXKAGgs+Znoyy9hd7jEt8Gqkl74u38m0YtKHSlw+AW2eguj3RYoIZHg3/s5w==",
   "success": true,
   "projectFilePath": "D:\\Artem\\Файли\\C# code\\ASP.NET core app\\Web Scraping Mania\\Web Scraping Mania\\Web Scraping Mania.csproj",
   "expectedPackageFiles": [
@@ -33,15 +33,15 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.options\\9.0.0-preview.2.24128.5\\microsoft.extensions.options.9.0.0-preview.2.24128.5.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\9.0.0-preview.2.24128.5\\microsoft.extensions.options.configurationextensions.9.0.0-preview.2.24128.5.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.0-preview.2.24128.5\\microsoft.extensions.primitives.9.0.0-preview.2.24128.5.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.18\\microsoft.net.illink.tasks.8.0.18.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.web.webview2\\1.0.2470-prerelease\\microsoft.web.webview2.1.0.2470-prerelease.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.diagnostics.diagnosticsource\\9.0.0-preview.2.24128.5\\system.diagnostics.diagnosticsource.9.0.0-preview.2.24128.5.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.0-preview.2.24128.5\\system.diagnostics.eventlog.9.0.0-preview.2.24128.5.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.text.encodings.web\\9.0.0-preview.2.24128.5\\system.text.encodings.web.9.0.0-preview.2.24128.5.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.text.json\\9.0.0-preview.2.24128.5\\system.text.json.9.0.0-preview.2.24128.5.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\8.0.18\\microsoft.netcore.app.runtime.win-x86.8.0.18.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\8.0.18\\microsoft.windowsdesktop.app.runtime.win-x86.8.0.18.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\8.0.18\\microsoft.aspnetcore.app.runtime.win-x86.8.0.18.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\8.0.4\\microsoft.netcore.app.runtime.win-x86.8.0.4.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\8.0.4\\microsoft.windowsdesktop.app.runtime.win-x86.8.0.4.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\8.0.4\\microsoft.aspnetcore.app.runtime.win-x86.8.0.4.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.31\\microsoft.windows.sdk.net.ref.10.0.22621.31.nupkg.sha512"
   ],
   "logs": []
 }
